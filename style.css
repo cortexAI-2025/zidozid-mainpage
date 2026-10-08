@@ -44,9 +44,9 @@ body {
   font-family:
     system-ui,
     -apple-system,
-    'Segoe UI',
+    "Segoe UI",
     Roboto,
-    'Helvetica Neue',
+    "Helvetica Neue",
     Arial,
     sans-serif;
   font-size: 17px;
@@ -232,7 +232,7 @@ summary:focus-visible {
 }
 
 .badges li::before {
-  content: '✓';
+  content: "✓";
   color: var(--ok);
   font-weight: 800;
   margin-right: 6px;
@@ -378,7 +378,7 @@ td.us {
 }
 
 .features li::before {
-  content: '✓';
+  content: "✓";
   position: absolute;
   left: 4px;
   color: var(--ok);
@@ -412,7 +412,7 @@ summary::-webkit-details-marker {
 }
 
 summary::after {
-  content: '+';
+  content: "+";
   position: absolute;
   right: 4px;
   top: 14px;
@@ -421,7 +421,7 @@ summary::after {
 }
 
 details[open] summary::after {
-  content: '−';
+  content: "−";
 }
 
 details p {
@@ -459,15 +459,12 @@ details p {
   margin-top: 1.8em;
 }
 
-.legal p {
-  white-space: pre-line;
+.legal ul {
+  padding-left: 1.2em;
 }
 
-.todo {
-  background: #fff4d6;
-  color: #5c4300;
-  border-radius: 10px;
-  padding: 10px 14px;
+.legal li {
+  margin-bottom: 0.3em;
 }
 
 @media (prefers-reduced-motion: reduce) {
