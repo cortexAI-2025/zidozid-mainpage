@@ -1,0 +1,477 @@
+/* Site vitrine zidozid.fr : feuille unique, sans dépendance externe. */
+:root {
+  --brand: #e1140a;
+  --brand-dark: #b80f07;
+  --orange: #f07800;
+  --yellow: #ffc400;
+  --text: #14161a;
+  --muted: #4b5260;
+  --bg: #ffffff;
+  --surface: #f6f6f7;
+  --border: #e4e5e8;
+  --link: #c0110a;
+  --ok: #138a3e;
+  --radius: 16px;
+  --max: 1080px;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #f3f4f6;
+    --muted: #b4b8c2;
+    --bg: #111215;
+    --surface: #1c1d22;
+    --border: #2d2f36;
+    --link: #ff7a3d;
+    --ok: #4ade80;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--bg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--link);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 16px;
+  top: 16px;
+  background: var(--bg);
+  padding: 8px 12px;
+  z-index: 10;
+}
+
+/* En-tête */
+.header {
+  border-bottom: 1px solid var(--border);
+}
+
+.header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+}
+
+.header img {
+  display: block;
+  width: 92px;
+}
+
+.header nav a {
+  margin-left: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.header nav a:hover {
+  color: var(--link);
+}
+
+@media (max-width: 640px) {
+  .header nav {
+    display: none;
+  }
+}
+
+/* Boutons */
+.btn {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--brand-dark);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text);
+}
+
+.btn:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+@media (max-width: 480px) {
+  .actions .btn {
+    width: 100%;
+  }
+}
+
+/* Accueil */
+.hero {
+  text-align: center;
+  padding: 56px 0 48px;
+}
+
+.hero .logo {
+  width: 240px;
+  margin: 0 auto 24px;
+  display: block;
+}
+
+.hero .lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto 24px;
+}
+
+.badges {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.badges li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.95rem;
+}
+
+.badges li::before {
+  content: '✓';
+  color: var(--ok);
+  font-weight: 800;
+  margin-right: 6px;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 20px;
+}
+
+/* Sections */
+section {
+  padding: 56px 0;
+}
+
+section.alt {
+  background: var(--surface);
+}
+
+.center {
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: 28px;
+}
+
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+section:not(.alt) .card {
+  background: var(--surface);
+}
+
+.card p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.steps {
+  counter-reset: step;
+}
+
+.steps .card h3::before {
+  counter-increment: step;
+  content: counter(step);
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+/* Comparaison */
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 28px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 520px;
+}
+
+th,
+td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+thead th {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+thead th.us,
+td.us {
+  color: var(--brand);
+  font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  thead th.us,
+  td.us {
+    color: var(--link);
+  }
+}
+
+/* Tarif */
+.price-card {
+  max-width: 440px;
+  margin: 28px auto 0;
+  text-align: center;
+  background: var(--bg);
+  border: 2px solid var(--brand);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+}
+
+.price {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.period {
+  color: var(--muted);
+  display: block;
+  margin: 6px 0 20px;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  text-align: left;
+}
+
+.features li {
+  padding: 6px 0 6px 28px;
+  position: relative;
+}
+
+.features li::before {
+  content: '✓';
+  position: absolute;
+  left: 4px;
+  color: var(--ok);
+  font-weight: 800;
+}
+
+.price-card .btn {
+  width: 100%;
+}
+
+/* FAQ */
+.faq {
+  max-width: 760px;
+  margin: 28px auto 0;
+}
+
+details {
+  border-bottom: 1px solid var(--border);
+}
+
+summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 32px 18px 0;
+  font-weight: 700;
+  position: relative;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::after {
+  content: '+';
+  position: absolute;
+  right: 4px;
+  top: 14px;
+  font-size: 1.4rem;
+  color: var(--brand);
+}
+
+details[open] summary::after {
+  content: '−';
+}
+
+details p {
+  color: var(--muted);
+  padding-bottom: 8px;
+}
+
+/* Pied de page */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 0 40px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  justify-content: space-between;
+}
+
+.footer nav a {
+  margin-right: 18px;
+}
+
+/* Pages légales */
+.legal {
+  max-width: 760px;
+  padding: 40px 20px 56px;
+}
+
+.legal h2 {
+  font-size: 1.25rem;
+  margin-top: 1.8em;
+}
+
+.legal p {
+  white-space: pre-line;
+}
+
+.todo {
+  background: #fff4d6;
+  color: #5c4300;
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
