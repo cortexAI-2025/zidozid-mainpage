@@ -1,0 +1,25 @@
+# zidozid — Click & Collect / Delivery
+
+> Site officiel de présentation de Zidozid, service de commande à emporter et de livraison indépendante, exploité par AIWorkPay. Langue : français.
+
+## État du service
+Service en préparation. Ce site vitrine permet uniquement de demander des informations et de se préinscrire par e-mail. Il ne crée pas de compte, ne prend pas de commande et ne facture aucun abonnement. Aucun endpoint de commande ou de paiement n’est proposé ici.
+
+## Fonctionnement et tarifs annoncés
+- Le client choisit le retrait sur place ou la livraison, selon la disponibilité des livreurs rattachés au restaurant.
+- Le client paie le repas au restaurant et le tarif de livraison au livreur ; le restaurant ne rémunère pas le livreur.
+- Zéro commission Zidozid pour les restaurants et les livreurs. Les éventuels frais du prestataire de paiement restent distincts.
+- Abonnement par restaurant ou livreur : 9,99 EUR TTC par mois ; premier mois gratuit ; sans engagement.
+- Livreurs : auto-entrepreneur ou société, SIRET et justificatif d’immatriculation adapté au statut ou Kbis avant activation.
+- Rattachement aux restaurants avec leur accord. Espace livreur prévu : disponibilités, courses, suivi, revenus et abonnement.
+
+## Pages de référence
+- [Accueil](https://zidozid.fr/)
+- [Livreurs](https://zidozid.fr/#livreurs)
+- [Tarifs](https://zidozid.fr/#tarif)
+- [Questions fréquentes](https://zidozid.fr/#faq)
+- [Mentions légales](https://zidozid.fr/mentions-legales/)
+- [Confidentialité](https://zidozid.fr/confidentialite/)
+
+## Contact
+contact@aiworkpay.fr — informations et préinscriptions.

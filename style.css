@@ -269,7 +269,6 @@ section:not(.alt) .card {
   margin: 0;
 }
 
-.icon-symbols { position: absolute; width: 0; height: 0; overflow: hidden; }
 .icon {
   display: grid;
   place-items: center;
@@ -475,3 +474,5 @@ details p {
     scroll-behavior: auto;
   }
 }
+
+.brand-signature { font-weight: 800; color: #b83213; letter-spacing: .025em; font-size: clamp(1rem, 3vw, 1.35rem); margin: 16px 0; }
