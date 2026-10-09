@@ -11,7 +11,7 @@
     <meta name="theme-color" content="#E1140A" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="stylesheet" href="/style.css?v=20261009-2" />
+    <link rel="stylesheet" href="/style.css?v=20261010-1" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Zidozid" />
     <meta property="og:locale" content="fr_FR" />
@@ -35,7 +35,8 @@
       "name": "AIWorkPay",
       "legalName": "aiworkpay SASU",
       "email": "contact@aiworkpay.fr",
-      "url": "https://zidozid.fr/"
+      "url": "https://zidozid.fr/",
+      "logo": "https://zidozid.fr/img/logo.png"
     },
     {
       "@type": "WebSite",
@@ -57,6 +58,76 @@
         "@id": "https://zidozid.fr/#organization"
       },
       "description": "Service en préparation. Préinscription par e-mail. Retrait sur place ou livraison payée par le client. Aucune commission Zidozid pour les restaurants et les livreurs. Abonnement par professionnel : 9,99 € TTC par mois, premier mois gratuit. Aucun paiement ni commande sur ce site vitrine."
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://zidozid.fr/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Zidozid vend-il des repas ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. Zidozid est un service. Les repas sont vendus par les restaurants, à leurs prix, et le paiement leur est versé directement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le client paie-t-il des frais ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aucun frais de plateforme. Le client paie son repas et, s’il choisit la livraison, le prix de la course annoncé avant validation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Que paie le restaurant ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un abonnement de 9,99 € TTC par mois, sans commission. Les frais bancaires des paiements par carte (Stripe) restent à sa charge, comme avec un terminal de paiement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Faites-vous de la livraison ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, par des livreurs indépendants rattachés au restaurant avec son accord. Le client choisit le retrait ou la livraison, selon la zone desservie et la disponibilité d’un livreur."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qui fixe le prix de la livraison ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le restaurant, avec sa zone de livraison. Le prix est affiché au client avant qu’il valide sa commande, et il est le même quel que soit le livreur."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment le livreur est-il payé ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le client paie la course directement sur le compte du livreur, en plus du repas payé au restaurant. Zidozid ne prélève rien sur la course ; le livreur paie seulement son abonnement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment fonctionne l’essai gratuit ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le premier mois est gratuit pour les restaurants et les livreurs. L’abonnement passe ensuite à 9,99 € TTC par mois, sans engagement : vous pouvez résilier à tout moment depuis votre espace."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quand le client est-il débité ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Seulement quand le restaurant accepte la commande. Si elle est refusée ou annulée, rien n’est débité."
+          }
+        }
+      ]
     }
   ]
 }</script>
@@ -77,6 +148,7 @@
           <a href="#livreurs">Livreurs</a>
           <a href="#tarif">Tarif</a>
           <a href="#faq">Questions</a>
+          <a href="/demo/" class="nav-demo">Démo</a>
         </nav>
       </div>
     </header>
@@ -111,6 +183,7 @@
             >Inscrire mon restaurant</a
           >
         </div>
+        <p class="demo-link"><a href="/demo/">▶ Essayer la démo interactive de l’application</a></p>
         <p class="note">
           Offre en préparation. Lancement prochainement sur l’App Store, Google Play et zidozid.fr. Restaurants et livreurs&nbsp;:
           écrivez-nous pour faire partie des premiers.
@@ -174,7 +247,43 @@
         </div>
       </section>
 
-      <section class="alt" id="clients">
+      <section class="alt" id="paiement">
+        <div class="wrap">
+          <h2 class="center">En livraison, qui paie quoi&nbsp;?</h2>
+          <p class="lead center">
+            Deux paiements séparés, chacun versé directement à celui qui travaille. Zidozid
+            n’encaisse jamais l’argent de vos commandes.
+          </p>
+          <div class="split">
+            <div class="split-item">
+              <span class="split-who">Le repas</span>
+              <span class="split-arrow" aria-hidden="true">→</span>
+              <b>Au restaurant</b>
+              <p>Au prix de la carte, payé directement sur son compte.</p>
+            </div>
+            <div class="split-item">
+              <span class="split-who">La course</span>
+              <span class="split-arrow" aria-hidden="true">→</span>
+              <b>Au livreur</b>
+              <p>Prix fixé par le restaurant et affiché avant de valider.</p>
+            </div>
+            <div class="split-item split-zero">
+              <span class="split-who">Commission Zidozid</span>
+              <span class="split-arrow" aria-hidden="true">→</span>
+              <b>0&nbsp;€</b>
+              <p>Restaurants et livreurs paient un abonnement fixe, c’est tout.</p>
+            </div>
+          </div>
+          <ol class="flow">
+            <li>Le client choisit la livraison et valide ses deux paiements&nbsp;: rien n’est encore débité.</li>
+            <li>Un livreur rattaché au restaurant confirme la course, puis le restaurant accepte la commande&nbsp;: les deux paiements sont débités.</li>
+            <li>Le livreur montre son code de retrait au comptoir et part livrer.</li>
+            <li>Le client lui donne son code de livraison&nbsp;: la commande est remise. Refus ou annulation&nbsp;: rien n’est débité.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="clients">
         <div class="wrap">
           <h2 class="center">Pour les clients</h2>
           <div class="grid">
@@ -211,7 +320,7 @@
         </div>
       </section>
 
-      <section id="restaurants">
+      <section class="alt" id="restaurants">
         <div class="wrap">
           <h2 class="center">Pour les restaurants</h2>
           <div class="grid">
@@ -267,7 +376,7 @@
         </div>
       </section>
 
-      <section class="alt">
+      <section>
         <div class="wrap">
           <h2 class="center">Ce que coûte une commande</h2>
           <div class="table-wrap">
@@ -286,9 +395,14 @@
                   <td>souvent 15 à 30&nbsp;%</td>
                 </tr>
                 <tr>
-                  <th scope="row">Frais pour le client</th>
+                  <th scope="row">Frais de service pour le client</th>
                   <td class="us">Aucun</td>
-                  <td>frais de service fréquents</td>
+                  <td>fréquents</td>
+                </tr>
+                <tr>
+                  <th scope="row">Livraison</th>
+                  <td class="us">Prix fixé par le restaurant, payé au livreur</td>
+                  <td>frais de livraison, souvent en plus des frais de service</td>
                 </tr>
                 <tr>
                   <th scope="row">Prix pour le client</th>
@@ -299,6 +413,11 @@
                   <th scope="row">Coût pour le restaurant</th>
                   <td class="us">9,99&nbsp;€ TTC par mois</td>
                   <td>variable, selon les ventes</td>
+                </tr>
+                <tr>
+                  <th scope="row">Coût pour le livreur</th>
+                  <td class="us">9,99&nbsp;€ TTC par mois, 0&nbsp;% sur ses courses</td>
+                  <td>part de la course reversée à la plateforme</td>
                 </tr>
               </tbody>
             </table>
@@ -311,7 +430,7 @@
         </div>
       </section>
 
-      <section id="livreurs">
+      <section class="alt" id="livreurs">
         <div class="wrap">
           <h2 class="center">Livreurs indépendants : vos courses, sans commission</h2>
           <p class="lead center">Rejoignez les restaurants de votre secteur. Le client paie la livraison ; le restaurant ne vous rémunère pas et ne prélève rien sur votre course.</p>
@@ -345,8 +464,9 @@
             <a
               class="btn btn-primary"
               href="mailto:contact@aiworkpay.fr?subject=Inscription%20d%E2%80%99un%20restaurant%20sur%20Zidozid&amp;body=Bonjour%2C%0A%0AJe%20souhaite%20inscrire%20mon%20commerce%20sur%20Zidozid.%0A%0ANom%20du%20commerce%20%3A%20%0AVille%20%3A%20%0AT%C3%A9l%C3%A9phone%20%3A%20%0A"
-              >Réserver ma place parmi les premiers</a
+              >Restaurant&nbsp;: réserver ma place</a
             >
+            <a class="btn btn-secondary" href="#livreurs">Livreur&nbsp;: me préinscrire</a>
           </div>
           <p class="note center">Pour les clients : repas au prix de la carte, livraison en supplément si choisie.</p>
         </div>
@@ -378,7 +498,24 @@
             <details>
               <summary>Faites-vous de la livraison&nbsp;?</summary>
               <p>
-                La livraison fait partie de l’offre en préparation. Des livreurs indépendants pourront se rattacher aux restaurants. Le client choisira le retrait ou la livraison, selon la disponibilité et la zone desservie.
+                Oui, par des livreurs indépendants rattachés au restaurant avec son accord. Le
+                client choisit le retrait ou la livraison, selon la zone desservie et la
+                disponibilité d’un livreur.
+              </p>
+            </details>
+            <details>
+              <summary>Qui fixe le prix de la livraison&nbsp;?</summary>
+              <p>
+                Le restaurant, avec sa zone de livraison. Le prix est affiché au client avant
+                qu’il valide sa commande, et il est le même quel que soit le livreur.
+              </p>
+            </details>
+            <details>
+              <summary>Comment le livreur est-il payé&nbsp;?</summary>
+              <p>
+                Le client paie la course directement sur le compte du livreur, en plus du repas
+                payé au restaurant. Zidozid ne prélève rien sur la course&nbsp;; le livreur paie
+                seulement son abonnement.
               </p>
             </details>
             <details>

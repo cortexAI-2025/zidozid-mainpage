@@ -7,6 +7,7 @@ Service en préparation. Ce site vitrine permet uniquement de demander des infor
 
 ## Fonctionnement et tarifs annoncés
 - Le client choisit le retrait sur place ou la livraison, selon la disponibilité des livreurs rattachés au restaurant.
+- Livraison : deux paiements séparés, le repas au restaurant et la course au livreur ; le prix de la course est fixé par le restaurant et affiché avant validation.
 - Le client paie le repas au restaurant et le tarif de livraison au livreur ; le restaurant ne rémunère pas le livreur.
 - Zéro commission Zidozid pour les restaurants et les livreurs. Les éventuels frais du prestataire de paiement restent distincts.
 - Abonnement par restaurant ou livreur : 9,99 EUR TTC par mois ; premier mois gratuit ; sans engagement.
@@ -15,6 +16,8 @@ Service en préparation. Ce site vitrine permet uniquement de demander des infor
 
 ## Pages de référence
 - [Accueil](https://zidozid.fr/)
+- [Démo interactive de l’application](https://zidozid.fr/demo/)
+- [Livraison : qui paie quoi](https://zidozid.fr/#paiement)
 - [Livreurs](https://zidozid.fr/#livreurs)
 - [Tarifs](https://zidozid.fr/#tarif)
 - [Questions fréquentes](https://zidozid.fr/#faq)

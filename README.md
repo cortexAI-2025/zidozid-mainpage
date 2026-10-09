@@ -1,19 +1,21 @@
 # zidozid-mainpage
 
-Site web **zidozid.fr** : la page d'accueil de Zidozid, la vente à emporter sans commission.
+Site web **zidozid.fr** : la page d'accueil de Zidozid, à emporter ou livré, sans commission.
 L'application (iOS, Android, web) est dans un autre dépôt : `cortexAI-2025/zidozid`.
 
-Le site est en HTML et CSS seulement : pas de JavaScript, pas de cookie, aucune ressource externe (polices système).
+Le site est en HTML et CSS : pas de cookie, aucune ressource externe (polices système). Seule la démo (`/demo/`) contient du JavaScript, intégré au fichier.
 
 | Fichier | Contenu |
 |---|---|
 | `index.html` | Page d'accueil |
 | `mentions-legales/index.html` | Mentions légales |
 | `confidentialite/index.html` | Politique de confidentialité |
+| `demo/index.html` | Démo interactive de l'application (client, restaurant, livreur), fichier autonome |
 | `404.html` | Page introuvable |
 | `style.css` | Mise en forme (couleurs de la marque, fond blanc permanent) |
 | `img/`, `favicon.png`, `apple-touch-icon.png` | Logo et icônes |
 | `og-image.png` | Image affichée quand on partage le lien (WhatsApp, Facebook…) |
+| `sitemap.xml`, `robots.txt`, `llms.txt` | Référencement (moteurs de recherche et assistants IA) |
 | `CNAME` | Domaine personnalisé pour GitHub Pages |
 
 Les boutons ouvrent un e-mail prérempli vers `contact@aiworkpay.fr`.
@@ -22,7 +24,8 @@ Les boutons ouvrent un e-mail prérempli vers `contact@aiworkpay.fr`.
 
 - Modifiez les fichiers puis poussez sur `main` : le site est republié automatiquement en une minute environ.
 - Pour l'essayer en local : `npx serve .`
-- **Avant la mise en ligne**, remplacez les éléments entre crochets dans les pages légales (raison sociale, SIREN, adresse, directeur de la publication).
+- Après une modification de `style.css`, changez le numéro `?v=` dans les pages pour que les navigateurs rechargent la feuille de style.
+- La FAQ de l'accueil est aussi décrite dans les données structurées (`FAQPage`, en haut de `index.html`) : gardez les deux identiques.
 
 ## Mise en ligne (une seule fois)
 
