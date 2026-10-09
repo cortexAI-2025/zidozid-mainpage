@@ -127,10 +127,61 @@ p {
   color: var(--link);
 }
 
+/* En-tête toujours visible ; sur téléphone, le menu défile horizontalement. */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgb(255 255 255 / 94%);
+  backdrop-filter: saturate(1.4) blur(8px);
+}
+
+.header nav a.nav-demo {
+  color: var(--link);
+}
+
+html {
+  scroll-padding-top: 76px;
+}
+
 @media (max-width: 640px) {
+  .header .wrap {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding-top: 8px;
+    min-height: 0;
+  }
+
+  .header img {
+    width: 72px;
+  }
+
   .header nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 4px 0 10px;
+    scrollbar-width: none;
+  }
+
+  .header nav::-webkit-scrollbar {
     display: none;
   }
+
+  .header nav a {
+    margin: 0;
+    flex: none;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.92rem;
+  }
+
+  html {
+    scroll-padding-top: 110px;
+  }
+
 }
 
 /* Boutons */
@@ -476,3 +527,101 @@ details p {
 }
 
 .brand-signature { font-weight: 800; color: #b83213; letter-spacing: .025em; font-size: clamp(1rem, 3vw, 1.35rem); margin: 16px 0; }
+
+/* Démo interactive */
+.demo-link {
+  margin: 18px 0 0;
+  font-weight: 700;
+}
+
+.demo-link a {
+  text-decoration: none;
+}
+
+.demo-link a:hover {
+  text-decoration: underline;
+}
+
+/* Livraison : qui paie quoi */
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.split-item {
+  border: 1px solid #f0e3db;
+  border-radius: var(--radius);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 4px 10px;
+}
+
+.split-who {
+  font-weight: 700;
+}
+
+.split-arrow {
+  color: var(--orange);
+  font-weight: 800;
+}
+
+.split-item b {
+  color: var(--brand);
+  font-size: 1.15rem;
+}
+
+.split-item p {
+  grid-column: 1 / -1;
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.split-zero {
+  background: linear-gradient(140deg, #fff8d6 0%, #fff1e0 100%);
+  border-color: #ffd98a;
+}
+
+.flow {
+  max-width: 760px;
+  margin: 28px auto 0;
+  padding-left: 1.4em;
+  color: var(--muted);
+}
+
+.flow li {
+  margin: 0 0 10px;
+  padding-left: 4px;
+}
+
+.flow li::marker {
+  color: var(--brand);
+  font-weight: 800;
+}
+
+.price-card .btn + .btn {
+  margin-top: 10px;
+}
+
+/* Téléphone : le logo est déjà dans l'en-tête, on garde l'essentiel au-dessus de la ligne de flottaison. */
+@media (max-width: 640px) {
+  .hero {
+    padding: 24px 0 40px;
+  }
+
+  .hero .logo {
+    width: 120px;
+    margin-bottom: 4px;
+  }
+
+  .brand-signature {
+    margin: 8px 0;
+  }
+
+  .hero .lead {
+    font-size: 1.02rem;
+  }
+}
