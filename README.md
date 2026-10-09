@@ -11,7 +11,7 @@ Le site est en HTML et CSS seulement : pas de JavaScript, pas de cookie, aucune 
 | `mentions-legales/index.html` | Mentions légales |
 | `confidentialite/index.html` | Politique de confidentialité |
 | `404.html` | Page introuvable |
-| `style.css` | Mise en forme (couleurs de la marque, mode sombre) |
+| `style.css` | Mise en forme (couleurs de la marque, fond blanc permanent) |
 | `img/`, `favicon.png`, `apple-touch-icon.png` | Logo et icônes |
 | `og-image.png` | Image affichée quand on partage le lien (WhatsApp, Facebook…) |
 | `CNAME` | Domaine personnalisé pour GitHub Pages |

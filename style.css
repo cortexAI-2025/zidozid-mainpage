@@ -7,26 +7,15 @@
   --text: #14161a;
   --muted: #4b5260;
   --bg: #ffffff;
-  --surface: #f6f6f7;
+  --surface: #ffffff;
   --border: #e4e5e8;
   --link: #c0110a;
   --ok: #138a3e;
   --radius: 16px;
   --max: 1080px;
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #f3f4f6;
-    --muted: #b4b8c2;
-    --bg: #111215;
-    --surface: #1c1d22;
-    --border: #2d2f36;
-    --link: #ff7a3d;
-    --ok: #4ade80;
-  }
-}
 
 *,
 *::before,
@@ -333,13 +322,6 @@ thead th.us,
 td.us {
   color: var(--brand);
   font-weight: 700;
-}
-
-@media (prefers-color-scheme: dark) {
-  thead th.us,
-  td.us {
-    color: var(--link);
-  }
 }
 
 /* Tarif */
