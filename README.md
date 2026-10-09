@@ -16,7 +16,7 @@ Le site est en HTML et CSS seulement : pas de JavaScript, pas de cookie, aucune 
 | `og-image.png` | Image affichée quand on partage le lien (WhatsApp, Facebook…) |
 | `CNAME` | Domaine personnalisé pour GitHub Pages |
 
-Les boutons ouvrent un e-mail prérempli vers `contact@zidozid.fr`.
+Les boutons ouvrent un e-mail prérempli vers `contact@aiworkpay.fr`.
 
 ## Modifier le site
 
@@ -48,6 +48,6 @@ Les boutons ouvrent un e-mail prérempli vers `contact@zidozid.fr`.
 
 Ne touchez pas aux enregistrements MX, qui servent à l'e-mail.
 
-4. **IONOS** : créez la boîte mail (ou une redirection) `contact@zidozid.fr`.
+4. **IONOS** : créez la boîte mail (ou une redirection) `contact@aiworkpay.fr`.
 
 **Vérifier** : `dig +short zidozid.fr` renvoie les 4 adresses GitHub, https://zidozid.fr affiche la page, et https://www.zidozid.fr y redirige.

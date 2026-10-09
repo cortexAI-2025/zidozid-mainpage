@@ -269,11 +269,32 @@ section:not(.alt) .card {
   margin: 0;
 }
 
+.icon-symbols { position: absolute; width: 0; height: 0; overflow: hidden; }
 .icon {
-  font-size: 1.6rem;
-  line-height: 1;
-  margin-bottom: 10px;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin-bottom: 18px;
+  border-radius: 19px 19px 19px 7px;
+  color: #b80f07;
+  background: linear-gradient(140deg, #fff4b3 0%, #ffc400 58%, #f07800 100%);
+  border: 1px solid #ffc400;
+  box-shadow: 0 5px 0 #e1140a, 0 9px 18px rgb(225 20 10 / 9%);
 }
+.icon svg {
+  width: 29px;
+  height: 29px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.card { border-color: #f0e3db; }
+.card h3 { letter-spacing: -0.025em; }
+section + section { border-top: 1px solid #f3eee9; }
+
 
 .steps {
   counter-reset: step;
