@@ -167,6 +167,30 @@ hr { border: 0; border-top: 1px solid var(--border); margin: 2px 0; width: 100%;
   .banner { top: 8px; }
   #guide-more { display: none; }
 }
+/* ---- Dans l'APK de démo : plein écran, sans cadre de téléphone ---- */
+body.in-app { height: 100vh; overflow: hidden; background: var(--bg); }
+.in-app .top, .in-app #guide-more { display: none; }
+.in-app .stage { display: flex; flex-direction: column; height: 100vh; max-width: none; padding: 0; gap: 0; }
+.in-app aside { position: static; padding: 6px 8px; gap: 6px; flex: none; background: var(--page); }
+.in-app .panel { padding: 8px; border-radius: 12px; }
+.in-app .panel h2 { display: none; }
+.in-app .roles { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.in-app .role { flex-direction: row; justify-content: center; gap: 6px; padding: 6px; border-radius: 10px; }
+.in-app .role small { display: none; }
+.in-app .role b { font-size: 13px; }
+.in-app .role .ico { width: 24px; height: 24px; font-size: 15px; }
+.in-app .role .dot { top: -6px; right: -4px; }
+.in-app .guide-step { padding: 7px 9px; font-size: 12.5px; line-height: 1.35; }
+.in-app .guide-step b { display: inline; margin-right: 4px; }
+.in-app #guide > div { margin-top: 6px !important; }
+.in-app #guide .btn { padding: 7px 10px; font-size: 13px; border-radius: 10px; }
+.in-app #guide { display: flex; flex-wrap: wrap; gap: 6px; }
+.in-app #guide .guide-step { flex: 1 1 100%; }
+.in-app #guide > div { flex: 1; margin: 0 !important; }
+.in-app .phone-wrap { flex: 1; min-height: 0; }
+.in-app .phone { width: 100%; max-width: none; height: 100%; min-height: 0; border: 0; border-radius: 0; box-shadow: none; }
+.in-app .statusbar { display: none; }
+.in-app .banner { top: 8px; }
 </style>
 </head>
 <body>
