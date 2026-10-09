@@ -10,7 +10,7 @@ Service en préparation. Ce site vitrine permet uniquement de demander des infor
 - Livraison : deux paiements séparés, le repas au restaurant et la course au livreur ; le prix de la course est fixé par le restaurant et affiché avant validation.
 - Le client paie le repas au restaurant et le tarif de livraison au livreur ; le restaurant ne rémunère pas le livreur.
 - Zéro commission Zidozid pour les restaurants et les livreurs. Les éventuels frais du prestataire de paiement restent distincts.
-- Abonnement par restaurant ou livreur : 9,99 EUR TTC par mois ; premier mois gratuit ; sans engagement.
+- Abonnement par restaurant ou livreur : 9,99 EUR TTC par mois ; 30 jours d'essai gratuit ; sans engagement.
 - Livreurs : auto-entrepreneur ou société, SIRET et justificatif d’immatriculation adapté au statut ou Kbis avant activation.
 - Rattachement aux restaurants avec leur accord. Espace livreur prévu : disponibilités, courses, suivi, revenus et abonnement.
 
