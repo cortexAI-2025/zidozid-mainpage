@@ -625,3 +625,7 @@ details p {
     font-size: 1.02rem;
   }
 }
+
+/* Logo officiel fourni le 10 octobre 2026. */
+.header img { width: 180px; height: auto; }
+.hero .logo, .logo { width: min(480px, 100%); height: auto; }
