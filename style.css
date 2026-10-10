@@ -629,3 +629,7 @@ details p {
 /* Logo officiel fourni le 10 octobre 2026. */
 .header img { width: 180px; height: auto; }
 .hero .logo, .logo { width: min(480px, 100%); height: auto; }
+
+/* Recadrage du visuel : symbole et nom uniquement, sans bords de la photo. */
+.brand-crop { display: inline-block; position: relative; width: 180px; height: 54px; overflow: hidden; vertical-align: middle; }
+.brand-crop img, .header .brand-crop img { position: absolute; width: 276.48px; max-width: none; height: 150.84px; left: -48.6px; top: -49.5px; margin: 0; border: 0; border-radius: 0; }

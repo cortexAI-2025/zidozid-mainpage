@@ -191,11 +191,15 @@ body.in-app { height: 100vh; overflow: hidden; background: var(--bg); }
 .in-app .phone { width: 100%; max-width: none; height: 100%; min-height: 0; border: 0; border-radius: 0; box-shadow: none; }
 .in-app .statusbar { display: none; }
 .in-app .banner { top: 8px; }
+
+/* Recadrage du visuel : symbole et nom uniquement, sans bords de la photo. */
+.brand-crop { display: inline-block; position: relative; width: 180px; height: 54px; overflow: hidden; vertical-align: middle; }
+.brand-crop img, .header .brand-crop img { position: absolute; width: 276.48px; max-width: none; height: 150.84px; left: -48.6px; top: -49.5px; margin: 0; border: 0; border-radius: 0; }
 </style>
 </head>
 <body>
 <div class="top">
-  <a href="/" aria-label="Retour à zidozid.fr"><img src="/img/logo-20261010.jpg" alt="Zidozid" /></a>
+  <a href="/" aria-label="Retour à zidozid.fr"><span class="brand-crop"><img src="/img/logo-20261010.jpg" alt="Zidozid" /></span></a>
   <div>
     <h1>Démo interactive de l'application</h1>
     <p>À emporter ou livré, sans commission. Passez d'un rôle à l'autre : la même commande circule entre le client, le restaurant et le livreur.</p>
@@ -837,7 +841,7 @@ function render() {
     ${isRoot ? `<nav class="tabbar">${TABS[S.role].map(([id, ic, l]) => `<button class="tab ${t.s === id ? 'on' : ''}" data-a="tab" data-v="${id}"><span>${ic}</span>${l}</button>`).join('')}</nav>` : ''}
     ${S.modal?.type === 'item' ? itemSheet() : ''}
     ${S.modal?.type === 'pay' ? paySheet() : ''}
-    ${S.banner ? `<div class="banner"><img src="${LOGO}" alt=""><div class="grow"><small>ZIDOZID · maintenant</small><b>${esc(S.banner.title)}</b><span class="muted" style="font-size:13px">${esc(S.banner.body)}</span></div></div>` : ''}
+    ${S.banner ? `<div class="banner"><div class="grow"><small>ZIDOZID · maintenant</small><b>${esc(S.banner.title)}</b><span class="muted" style="font-size:13px">${esc(S.banner.body)}</span></div></div>` : ''}
     ${S.toast ? `<div class="toast">${esc(S.toast)}</div>` : ''}`;
   phone.querySelector('.content').scrollTop = scroll;
   lastKey = key;
