@@ -617,7 +617,7 @@ const MERCHANT = {
     return { body: `
       <h2 class="title">Ma boutique</h2>
       <div class="card"><p class="subtitle">Paiements</p>${badge('Stripe ✓', 'ok')}<p class="muted">Paiements actifs : l'argent de vos ventes est versé sur votre compte bancaire.</p></div>
-      <div class="card"><p class="subtitle">Abonnement Zidozid Pro</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 9,99 € TTC par mois, sans engagement et sans commission sur vos ventes.</p>${btn('Gérer mon abonnement', 'toast', 'Ouvre le portail Stripe (carte, factures, résiliation).', 'secondary')}</div>
+      <div class="card"><p class="subtitle">Abonnement Zidozid Pro</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Après 30 jours d’essai gratuit : Restaurant Start 19,99 € HT/mois ou 199,99 € HT/an ; Pro multisite 29,99 € HT/mois ou 299,99 € HT/an. Zéro commission ZEROO sur vos ventes.</p>${btn('Gérer mon abonnement', 'toast', 'Ouvre le portail Stripe (carte, factures, résiliation).', 'secondary')}</div>
       <div class="card"><div class="row"><div class="grow"><p>Visible des clients</p><p class="muted">Votre commerce apparaît dans la recherche et sur votre QR code.</p></div>${sw(S.merchant.published, 'publish')}</div></div>
       <div class="card"><p class="subtitle">Pause</p>
         ${S.merchant.paused ? `<p>Pause en cours : plus de nouvelles commandes.</p>${btn('Reprendre les commandes', 'pause', 'off')}` : `<p class="muted">Un rush ? Mettez les commandes en pause.</p><div class="chips">${chip('15 min', 'pause', 'on')}${chip('30 min', 'pause', 'on')}${chip('1 h', 'pause', 'on')}${chip("Jusqu'à réactivation", 'pause', 'on')}</div>`}</div>
@@ -735,7 +735,7 @@ const COURIER = {
       <p class="muted">Connecté en tant que livreur@zidozid.test</p>
       <div class="card"><p class="subtitle">Mon profil livreur</p><p>Karim L.</p><p class="muted">Auto-entrepreneur · SIRET 882 123 456 00015</p><p class="muted">Scooter · 06 12 34 56 78</p></div>
       <div class="card"><p class="subtitle">Paiements</p>${badge('Stripe ✓', 'ok')}<p class="muted">Paiements actifs : vos courses sont versées sur votre compte bancaire. Stripe a vérifié votre identité et votre SIRET.</p></div>
-      <div class="card"><p class="subtitle">Abonnement Zidozid Livreur</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 9,99 € TTC par mois, sans engagement et sans commission sur vos courses.</p>${btn('Gérer mon abonnement', 'toast', 'Ouvre le portail Stripe (carte, factures, résiliation).', 'secondary')}</div>
+      <div class="card"><p class="subtitle">Abonnement Zidozid Livreur</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Après 30 jours d’essai gratuit : Livreur Start 14,99 € HT/mois ou 149,99 € HT/an. Zéro commission ZEROO sur vos courses.</p>${btn('Gérer mon abonnement', 'toast', 'Ouvre le portail Stripe (carte, factures, résiliation).', 'secondary')}</div>
       ${btn("Passer à l'espace client", 'role', 'client', 'secondary')}
       ${btn("Passer à l'espace commerçant", 'role', 'merchant', 'secondary')}` };
   },
