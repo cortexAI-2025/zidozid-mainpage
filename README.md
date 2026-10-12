@@ -40,3 +40,7 @@ La configuration DNS IONOS existante est à préserver : A vers les IP de GitHub
 Référence de l’audit fonctionnel : application `zidozid`, branche `main`, commit `be2977900a9f8ea9bc28d68778adcb9abac81066` (12 octobre 2026). Fonctions et identité vérifiées dans le README, les traductions et le thème de l’application.
 
 Vérification de cette refonte : scénarios DOM exécutés avec Linkedom (panier, retrait, livraison, remise, réinitialisation, profils, calculs, formulaire), contrôle des liens/ancres des 7 pages, JSON-LD, sitemap et syntaxe JavaScript. Vérification visuelle dans un navigateur non disponible dans l’environnement de publication.
+
+## Signature visuelle approuvée
+
+Le logo fourni le 12 octobre 2026 est intégré sur toutes les pages, avec sa typographie et les mentions « Click-and-collect / Livraison » et « Zéro commission », sans URL dans le visuel. `img/zidozid-signature.webp` conserve le visuel complet, optimisé en WebP ; le cadrage de la signature est réalisé en CSS. Il sert également aux aperçus de partage. Le favicon SVG cadre le symbole du même visuel.
