@@ -1,32 +1,23 @@
-# zidozid — Click & Collect / Delivery
+# Zidozid Maroc
 
-> Site officiel de présentation de Zidozid, service de commande à emporter et de livraison indépendante, exploité par AIWorkPay. Langue : français.
+> Site officiel de présentation du projet Zidozid pour le Maroc. Domaine : https://zidozid.fr/.
 
-## État du service
-Service en préparation. Ce site vitrine permet uniquement de demander des informations et de se préinscrire par e-mail. Il ne crée pas de compte, ne prend pas de commande et ne facture aucun abonnement. Aucun endpoint de commande ou de paiement n’est proposé ici.
+## Statut et modèle
+- Marché cible : Maroc. Devise de la démonstration et du diagnostic : MAD (dirham marocain, DH).
+- Site de présentation, lancement Maroc en préparation. Aucune commande, inscription applicative ou transaction réelle sur ce site.
+- Modèle : abonnement professionnel pour restaurants et livreurs indépendants, 0 % de commission Zidozid sur les commandes.
+- Tarifs Maroc et modalités d’essai non annoncés. Ne pas reprendre les tarifs européens ni les convertir en MAD.
+- Moyens de paiement locaux et ouverture par ville à confirmer avant lancement. Ne pas affirmer qu’un prestataire local est intégré.
+- Trois espaces : client, restaurant, livreur. À emporter et livraison selon zone et disponibilité.
+- Fidélité : 9 menus formules éligibles payés et remis chez un même restaurant = 1 menu formule offert ; suppléments payants exclus de la gratuité.
+- Les données de démo sont fictives. Le diagnostic calcule une commission, pas une économie nette.
 
-## Fonctionnement et tarifs annoncés
-- Le client choisit le retrait sur place ou la livraison, selon la disponibilité des livreurs rattachés au restaurant.
-- Livraison : deux paiements séparés, le repas au restaurant et la course au livreur ; le prix de la course est fixé par le restaurant et affiché avant validation.
-- Le client paie le repas au restaurant et le tarif de livraison au livreur ; le restaurant ne rémunère pas le livreur.
-- Zéro commission Zidozid pour les restaurants et les livreurs. Les éventuels frais du prestataire de paiement restent distincts.
-- 30 jours d’essai gratuit pour restaurants et livreurs.
-- Livreur Start : 14,99 EUR HT/mois ou 149,99 EUR HT/an.
-- Restaurant Start : 19,99 EUR HT/mois ou 199,99 EUR HT/an.
-- Restaurant Pro multisite : 29,99 EUR HT/mois ou 299,99 EUR HT/an.
-- Zéro commission ZEROO ; frais de paiement éventuels distincts.
-- Livreurs : auto-entrepreneur ou société, SIRET et justificatif d’immatriculation adapté au statut ou Kbis avant activation.
-- Rattachement aux restaurants avec leur accord. Espace livreur prévu : disponibilités, courses, suivi, revenus et abonnement.
-
-## Pages de référence
+## Pages
 - [Accueil](https://zidozid.fr/)
-- [Démo interactive de l’application](https://zidozid.fr/demo/)
-- [Livraison : qui paie quoi](https://zidozid.fr/#paiement)
-- [Livreurs](https://zidozid.fr/#livreurs)
-- [Tarifs](https://zidozid.fr/#tarif)
-- [Questions fréquentes](https://zidozid.fr/#faq)
+- [Démo des trois espaces](https://zidozid.fr/demo/)
+- [Diagnostic en dirhams](https://zidozid.fr/diagnostic.html)
 - [Mentions légales](https://zidozid.fr/mentions-legales/)
 - [Confidentialité](https://zidozid.fr/confidentialite/)
 
 ## Contact
-contact@aiworkpay.fr — informations et préinscriptions.
+contact@aiworkpay.fr. Les liens de contact préparent un e-mail, sans envoi automatique.
