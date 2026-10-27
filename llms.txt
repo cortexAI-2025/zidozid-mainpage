@@ -23,6 +23,7 @@ Service en préparation. Ce site vitrine permet uniquement de demander des infor
 - [Questions fréquentes](https://zidozid.fr/#faq)
 - [Mentions légales](https://zidozid.fr/mentions-legales/)
 - [Confidentialité](https://zidozid.fr/confidentialite/)
+- [Conditions générales d’abonnement](https://zidozid.fr/cgu-abonnement/)
 
 ## Contact
 contact@aiworkpay.fr — informations et préinscriptions.
