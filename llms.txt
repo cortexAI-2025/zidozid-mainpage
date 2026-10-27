@@ -1,17 +1,17 @@
 # zidozid — Click & Collect / Delivery
 
-> Site officiel de présentation de Zidozid, service de commande à emporter et de livraison indépendante, exploité par AIWorkPay. Langue : français.
+> Site officiel de présentation de Zidozid, service de commande à emporter et de livraison indépendante, exploité par AIWorkPay. Marché : Maroc. Langue : français. Devise : dirham marocain (MAD).
 
 ## État du service
 Service en préparation. Ce site vitrine permet uniquement de demander des informations et de se préinscrire par e-mail. Il ne crée pas de compte, ne prend pas de commande et ne facture aucun abonnement. Aucun endpoint de commande ou de paiement n’est proposé ici.
 
 ## Fonctionnement et tarifs annoncés
 - Le client choisit le retrait sur place ou la livraison, selon la disponibilité des livreurs rattachés au restaurant.
-- Livraison : deux paiements séparés, le repas au restaurant et la course au livreur ; le prix de la course est fixé par le restaurant et affiché avant validation.
-- Le client paie le repas au restaurant et le tarif de livraison au livreur ; le restaurant ne rémunère pas le livreur.
-- Zéro commission Zidozid pour les restaurants et les livreurs. Les éventuels frais du prestataire de paiement restent distincts.
-- Abonnement par restaurant ou livreur : 9,99 EUR TTC par mois ; 30 jours d'essai gratuit ; sans engagement.
-- Livreurs : auto-entrepreneur ou société, SIRET et justificatif d’immatriculation adapté au statut ou Kbis avant activation.
+- Livraison : le repas se paie par carte (CMI, sur le compte du restaurant) ou en espèces au comptoir en retrait ; la course se règle en espèces au livreur. Le prix de la course est fixé par le restaurant et affiché avant validation.
+- Les courses sont proposées aux livreurs rattachés au restaurant : le premier qui accepte l’emporte. Le restaurant ne rémunère pas le livreur.
+- Zéro commission Zidozid pour les restaurants et les livreurs. Les frais bancaires du contrat CMI du restaurant restent distincts.
+- Abonnements TTC, 30 jours d'essai gratuit, sans engagement. Restaurant : Start 199 MAD par mois ou 1 999 MAD par an ; Pro 299 MAD par mois ou 2 999 MAD par an. Livreur : Start 149 MAD par mois ou 1 499 MAD par an ; Pro 249 MAD par mois ou 2 499 MAD par an.
+- Livreurs : indépendant ou société, ICE (15 chiffres) et justificatif d’activité adapté au statut avant activation.
 - Rattachement aux restaurants avec leur accord. Espace livreur prévu : disponibilités, courses, suivi, revenus et abonnement.
 
 ## Pages de référence

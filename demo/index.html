@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Démo interactive · Zidozid</title>
-<meta name="description" content="Essayez l'application Zidozid : commande à emporter ou livrée, deux paiements (repas au restaurant, course au livreur), sans commission. Démo cliquable côté client, restaurant et livreur." />
+<meta name="description" content="Essayez l'application Zidozid : commande à emporter ou livrée au Maroc, repas payé par carte (CMI) et course en espèces au livreur, sans commission. Démo cliquable côté client, restaurant et livreur." />
 <link rel="canonical" href="https://zidozid.fr/demo/" />
 <meta name="theme-color" content="#E1140A" />
 <meta property="og:type" content="website" />
@@ -208,11 +208,11 @@ body.in-app { height: 100vh; overflow: hidden; background: var(--bg); }
     <div class="panel" id="guide-more">
       <h2>Ce que montre la maquette</h2>
       <ul class="guide-list">
-        <li>Client : recherche, menu avec options, menu offert (fidélité), retrait ou livraison, deux paiements (repas au restaurant, course au livreur), suivi en direct.</li>
+        <li>Client : recherche, menu avec options, menu offert (fidélité), retrait ou livraison, repas payé par carte (CMI) et course en espèces au livreur, suivi en direct.</li>
         <li>Restaurant : commandes, menu, boutique, réglages de livraison et livreurs.</li>
-        <li>Livreur : disponibilité, courses, codes de retrait et de livraison, revenus, abonnement.</li>
+        <li>Livreur : disponibilité, missions (premier arrivé), codes de retrait et de livraison, revenus, abonnement.</li>
       </ul>
-      <p class="small" style="margin-top:10px">Démo : aucune donnée réelle, aucun paiement. Les montants sont ceux du restaurant de démonstration « Chez Samir ».</p><p style="margin-top:12px"><a href="/" style="color:var(--link);font-weight:700">← Retour à zidozid.fr</a></p>
+      <p class="small" style="margin-top:10px">Démo : aucune donnée réelle, aucun paiement. Les montants (en dirhams, MAD) sont ceux du restaurant de démonstration « Chez Samir », à Casablanca.</p><p style="margin-top:12px"><a href="/" style="color:var(--link);font-weight:700">← Retour à zidozid.fr</a></p>
     </div>
   </aside>
   <div class="phone-wrap"><div class="phone" id="phone"></div></div>
@@ -227,23 +227,23 @@ const LOGO = 'data:image/webp;base64,UklGRrZsAABXRUJQVlA4WAoAAAAQAAAA3wEA8QAAQUx
 // ---------------------------------------------------------------------------
 const MENU = [
   { cat: 'Menus', items: [
-    { id: 'tacos', name: 'Menu Tacos', desc: 'Tacos 2 viandes, frites et boisson', price: 1050, loyalty: true, emoji: '🌮', groups: [
+    { id: 'tacos', name: 'Menu Tacos', desc: 'Tacos 2 viandes, frites et boisson', price: 4500, loyalty: true, emoji: '🌮', groups: [
       { id: 'sauce', name: 'Sauce', min: 1, max: 2, options: [
         { id: 'alg', name: 'Algérienne', p: 0 }, { id: 'sam', name: 'Samouraï', p: 0 }, { id: 'bla', name: 'Blanche', p: 0 } ] },
       { id: 'sup', name: 'Suppléments', min: 0, max: 3, options: [
-        { id: 'ched', name: 'Cheddar', p: 100 }, { id: 'vde', name: 'Viande en plus', p: 250 } ] } ] },
-    { id: 'americain', name: 'Menu Américain', desc: 'Américain, frites et boisson', price: 950, loyalty: true, emoji: '🍔', groups: [] } ] },
+        { id: 'ched', name: 'Cheddar', p: 500 }, { id: 'vde', name: 'Viande en plus', p: 1000 } ] } ] },
+    { id: 'americain', name: 'Menu Américain', desc: 'Américain, frites et boisson', price: 4000, loyalty: true, emoji: '🍔', groups: [] } ] },
   { cat: 'Sandwichs', items: [
-    { id: 'kebab', name: 'Kebab', desc: 'Pain maison, salade, tomates, oignons', price: 750, loyalty: false, emoji: '🥙', groups: [
+    { id: 'kebab', name: 'Kebab', desc: 'Pain maison, salade, tomates, oignons', price: 2500, loyalty: false, emoji: '🥙', groups: [
       { id: 'sauce', name: 'Sauce', min: 1, max: 1, options: [ { id: 'bla', name: 'Blanche', p: 0 }, { id: 'har', name: 'Harissa', p: 0 } ] } ] } ] },
   { cat: 'Boissons', items: [
-    { id: 'canette', name: 'Canette 33 cl', desc: 'Au choix selon le stock', price: 150, loyalty: false, emoji: '🥤', groups: [] } ] },
+    { id: 'canette', name: 'Canette 33 cl', desc: 'Au choix selon le stock', price: 600, loyalty: false, emoji: '🥤', groups: [] } ] },
 ];
 const ITEMS = MENU.flatMap((c) => c.items);
 const ADDRESSES = [
-  { id: 'a1', line: '5 Rue Saint-Augustin', pc: '75002', city: 'Paris', dist: 650 },
-  { id: 'a2', line: '18 Rue du Faubourg Montmartre', pc: '75009', city: 'Paris', dist: 1400 },
-  { id: 'a3', line: '40 Avenue de la Grande Armée', pc: '75017', city: 'Paris', dist: 4300 },
+  { id: 'a1', line: '5 Rue Mustapha El Maani', pc: '20250', city: 'Casablanca', dist: 650 },
+  { id: 'a2', line: '18 Boulevard d\'Anfa', pc: '20100', city: 'Casablanca', dist: 1400 },
+  { id: 'a3', line: '40 Boulevard Zerktouni', pc: '20000', city: 'Casablanca', dist: 4300 },
 ];
 const ROLES = {
   client: { icon: '🛍️', name: 'Client', who: 'Nadia commande' },
@@ -265,8 +265,8 @@ function initialState() {
     cart: [], rewardKey: null, fulfillment: 'pickup', addrQuery: '', address: null, phone: '', instructions: '', note: '',
     order: null, history: [], loyalty: { count: 7, rewards: 1 },
     unavailable: {}, // produits en rupture
-    merchant: { published: true, paused: false, delivery: true, fee: 350, radius: 3000, lea: 'pending', prep: 10 },
-    courier: { available: true, today: 700, todayCount: 2, week: 2450, month: 9800, monthCount: 28, links: { kebab: null } },
+    merchant: { published: true, paused: false, delivery: true, fee: 1500, radius: 3000, lea: 'pending', prep: 10 },
+    courier: { available: true, today: 3000, todayCount: 2, week: 10500, month: 42000, monthCount: 28, links: { kebab: null } },
     notifs: { client: [], merchant: [], courier: [] },
     modal: null, banner: null, toast: null, codeInput: '', refusing: false, departure: null, search: '',
   };
@@ -277,7 +277,7 @@ let S = initialState();
 // Outils
 // ---------------------------------------------------------------------------
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-const fmt = (cents) => (cents / 100).toFixed(2).replace('.', ',') + ' €';
+const fmt = (cents) => (cents / 100).toFixed(2).replace('.', ',') + '\u00a0MAD';
 const fmtDist = (m) => (m < 1000 ? `${Math.round(m / 10) * 10} m` : `${(m / 1000).toFixed(1).replace('.', ',')} km`);
 const time = (d) => d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
 const inMinutes = (n) => time(new Date(Date.now() + n * 60000));
@@ -297,7 +297,7 @@ function cartDiscount() {
   const line = S.cart.find((l) => l.key === S.rewardKey);
   if (!line) return 0;
   const sub = cartSub();
-  return sub - line.base < 50 ? sub : line.base; // minimum Stripe 0,50 €
+  return sub - line.base < 100 ? sub : line.base; // reste à payer sous 1 MAD : offert
 }
 function quote() {
   if (!S.address) return null;
@@ -351,7 +351,7 @@ const CLIENT = {
       <div class="chips">${chip('📍 Utiliser ma position', 'toast', 'Position utilisée une seule fois, jamais enregistrée.', true)}</div>
       <div class="card click" data-a="open-merchant">
         <div class="row between"><p class="subtitle">Chez Samir</p>${canOrder() ? badge('Ouvert', 'ok') : badge(S.merchant.paused ? 'En pause' : 'Non publié', 'off')}</div>
-        <p class="muted">Snack · 12 rue de la Paix, Paris · 350 m</p>
+        <p class="muted">Snack · 12 rue Ibn Batouta, Casablanca · 350 m</p>
         ${S.merchant.delivery ? `<p class="link">🛵 Livraison possible · ${fmt(S.merchant.fee)}</p>` : ''}
         <p class="muted">🎁 Votre carte : ${S.loyalty.count}/9 · ${S.loyalty.rewards} menu offert</p>
       </div>
@@ -366,7 +366,7 @@ const CLIENT = {
     const disabled = !canOrder();
     return { title: 'Chez Samir', back: true, body: `
       <h2 class="title">Chez Samir</h2>
-      <p class="muted">Snack · 12 rue de la Paix, 75002 Paris</p>
+      <p class="muted">Snack · 12 rue Ibn Batouta, 20250 Casablanca</p>
       <div class="row">${canOrder() ? badge('Ouvert · prêt en 12 min', 'ok') : badge(S.merchant.paused ? 'En pause' : 'Non publié', 'off')}</div>
       ${S.merchant.delivery ? `<p class="link">🛵 Livraison possible · ${fmt(S.merchant.fee)}</p>` : ''}
       <p>Tacos, sandwichs et assiettes maison.</p>
@@ -419,7 +419,7 @@ const CLIENT = {
             <div class="field"><label>Adresse de livraison</label>
               <input class="input" data-m="addrQuery" data-live="addr" value="${esc(S.addrQuery)}" placeholder="Numéro et rue" autocomplete="off" />
               <div id="addr-sugg">${addrSuggestions()}</div>
-              <button class="fill" data-a="fill-addr">Démo : choisir « 5 Rue Saint-Augustin »</button>
+              <button class="fill" data-a="fill-addr">Démo : choisir « 5 Rue Mustapha El Maani »</button>
             </div>
             <div class="field"><label>Téléphone pour le livreur</label>
               <input class="input" data-m="phone" data-live="pay" value="${esc(S.phone)}" inputmode="tel" placeholder="06 12 34 56 78" />
@@ -428,17 +428,17 @@ const CLIENT = {
             <div class="field"><label>Instructions pour le livreur (facultatif)</label>
               <input class="input" data-m="instructions" value="${esc(S.instructions)}" placeholder="Ex. digicode, étage, interphone" /></div>
             ${!S.address ? '<p class="muted">Choisissez votre adresse de livraison dans la liste.</p>' : q.ok ? `<p class="link">${q.msg}</p>` : `<p class="error">${q.msg}</p>`}
-          ` : '<p class="muted">À récupérer chez Chez Samir, 12 rue de la Paix.</p>'}
+          ` : '<p class="muted">À récupérer chez Chez Samir, 12 rue Ibn Batouta.</p>'}
         </div>` : ''}
       <div class="field"><label>Une précision pour le commerçant ? (facultatif)</label>
         <input class="input" data-m="note" value="${esc(S.note)}" placeholder="Ex. sans oignons" /></div>
       <div class="row between"><span>Sous-total</span><span>${fmt(cartSub())}</span></div>
       ${discount ? `<div class="row between"><span>Menu offert</span><span>− ${fmt(discount)}</span></div>` : ''}
-      ${delivery ? `<div class="row between"><span>Livraison</span><span>${fmt(fee)}</span></div>` : ''}
-      <div class="row between"><b style="font-size:18px">Total</b><b style="font-size:18px">${fmt(total)}</b></div>
-      <p class="muted">Votre carte est seulement autorisée : vous n'êtes débité que si le commerçant accepte la commande.</p>
-      ${delivery ? '<p class="muted">Deux paiements : le repas au restaurant, la course au livreur. Aucun frais Zidozid.</p>' : '<p class="muted">Prix de la carte, sans frais de service.</p>'}
-      <div id="pay-btn">${payButton(total)}</div>` };
+      ${delivery ? `<div class="row between"><span>Livraison (espèces au livreur)</span><span>${fmt(fee)}</span></div>` : ''}
+      <div class="row between"><b style="font-size:18px">Repas à payer par carte</b><b style="font-size:18px">${fmt(total - fee)}</b></div>
+      <p class="muted">Le repas se paie par carte sur la page de paiement CMI du restaurant (3D Secure). S'il refuse la commande, il vous rembourse.</p>
+      ${delivery ? `<p class="muted">Le repas est payé par carte ; la course de ${fmt(fee)} se règle en espèces au livreur. Aucun frais Zidozid.</p>` : '<p class="muted">Prix de la carte, sans frais de service.</p>'}
+      <div id="pay-btn">${payButton(total - fee)}</div>` };
   },
 
   order(params) {
@@ -452,17 +452,15 @@ const CLIENT = {
     const failed = idx === -1;
     const done = DONE.includes(o.status);
     const statusText = {
-      placed: delivery ? 'En attente de confirmation du restaurant et du livreur…' : 'En attente de confirmation par le commerçant…',
-      accepted: delivery ? 'Acceptée : Karim livrera votre commande.' : `Acceptée : prête vers ${o.readyAt}.`,
+      placed: 'En attente de la réponse du restaurant…',
+      accepted: delivery ? (o.confirmed ? 'Acceptée : Karim livrera votre commande.' : 'Acceptée : un livreur va prendre la mission…') : `Acceptée : prête vers ${o.readyAt}.`,
       preparing: `En préparation, prête vers ${o.readyAt}.`,
-      ready: delivery ? 'Commande prête : Karim la récupère au restaurant.' : 'Votre commande est prête, vous pouvez venir la chercher !',
+      ready: delivery ? (o.confirmed ? 'Commande prête : Karim la récupère au restaurant.' : 'Commande prête : un livreur est recherché…') : 'Votre commande est prête, vous pouvez venir la chercher !',
       collected: 'Commande récupérée. Bon appétit !',
       out_for_delivery: 'Karim est en route avec votre commande.',
       delivered: 'Commande livrée. Bon appétit !',
-      refused: `Le commerçant n'a pas pu accepter votre commande${o.reason ? ` (${o.reason})` : ''}. Vous n'avez pas été débité.`,
-      cancelled: o.cancelledBy === 'courier'
-        ? "Aucun livreur n'a pu prendre votre commande. Vous n'avez pas été débité."
-        : "Commande annulée. Aucun montant n'a été débité.",
+      refused: `Le commerçant n'a pas pu accepter votre commande${o.reason ? ` (${o.reason})` : ''}. Le restaurant vous rembourse le repas payé par carte.`,
+      cancelled: "Commande annulée. Le restaurant vous rembourse le repas payé par carte.",
     }[o.status];
     return { title: 'Ma commande', back: true, body: `
       <h2 class="title">Chez Samir</h2>
@@ -501,7 +499,7 @@ const CLIENT = {
       ${current ? `<p class="subtitle">En cours</p>${row(current, 'current')}` : ''}
       <p class="subtitle">Passées</p>
       ${past.map((o) => row(o, o === S.order ? 'current' : o.id)).join('')}
-      <div class="card"><div class="row between"><p class="subtitle">Chez Samir</p>${badge('Récupérée', 'ok')}</div><p class="muted">Lundi · 12:41 · 19,00 €</p></div>
+      <div class="card"><div class="row between"><p class="subtitle">Chez Samir</p>${badge('Récupérée', 'ok')}</div><p class="muted">Lundi · 12:41 · 85,00 MAD</p></div>
       ${!current && !past.length ? '<p class="muted">Vos commandes passées s’afficheront ici.</p>' : ''}` };
   },
 
@@ -536,8 +534,8 @@ function addrSuggestions() {
   return `<div class="sugg">${ADDRESSES.map((a) => `<button data-a="pick-addr" data-v="${a.id}">${a.line}, ${a.pc} ${a.city}</button>`).join('')}</div>`;
 }
 function payButton(total) {
-  const t = total ?? cartSub() - cartDiscount() + (isDelivery() ? S.merchant.fee : 0);
-  return btn(t === 0 ? 'Commander mon menu offert' : `Payer · ${fmt(t)}`, 'pay', '', 'primary', canPay() ? '' : 'disabled');
+  const t = total === undefined ? cartSub() - cartDiscount() : total;
+  return btn(t === 0 ? 'Commander mon menu offert' : `Payer ${fmt(t)} par carte`, 'pay', '', 'primary', canPay() ? '' : 'disabled');
 }
 function departureCard() {
   if (S.departure) return `<div class="card"><p class="subtitle">🚶 En route</p><p>Arrivée prévue vers ${S.departure.eta} : Chez Samir est prévenu et lance la préparation au bon moment.</p><p class="muted">Votre position n'est pas enregistrée.</p></div>`;
@@ -550,21 +548,22 @@ function departureCard() {
 // ---------------------------------------------------------------------------
 function merchantOrderCard(o) {
   const delivery = o.fulfillment === 'delivery';
-  const waiting = delivery && o.status === 'placed' && !o.confirmed;
+  const waiting = false;
   const label = { placed: 'Nouvelle', accepted: 'Acceptée', preparing: 'En préparation', ready: 'Prête', out_for_delivery: 'En livraison' }[o.status];
   let actions = '';
   if (o.status === 'placed' && !S.refusing) {
     actions = `<p class="muted">Délai de préparation</p>
       <div class="chips">${[5, 10, 15, 20, 30].map((m) => chip(`${m} min`, 'prep', m, S.merchant.prep === m)).join('')}</div>
       ${btn(`Accepter · ${S.merchant.prep} min`, 'accept', '', 'primary', waiting ? 'disabled' : '')}
-      ${waiting ? '<p class="muted">Vous pourrez accepter dès que le livreur aura confirmé.</p>' : ''}
       ${btn('Refuser', 'refusing', '', 'ghost')}`;
   } else if (o.status === 'placed') {
-    actions = `<p class="muted">Pourquoi refuser ? Le client ne sera pas débité.</p>
+    actions = `<p class="muted">Pourquoi refuser ? Vous rembourserez le client (back-office CMI).</p>
       <div class="chips">${['Produit en rupture', 'Trop de commandes', 'Fermeture imminente', 'Autre'].map((r) => chip(r, 'refuse', r)).join('')}</div>
       ${btn('Annuler', 'refusing', '', 'ghost')}`;
   } else if (o.status === 'accepted' || o.status === 'preparing') {
     actions = `${o.status === 'accepted' ? btn('Lancer la préparation', 'mstatus', 'preparing', 'secondary') : ''}${btn('Commande prête', 'mstatus', 'ready')}`;
+  } else if (o.status === 'ready' && delivery && !o.confirmed) {
+    actions = '<p class="muted">En attente d’un livreur : vous pourrez remettre la commande dès qu’il aura accepté la mission.</p>';
   } else if (o.status === 'ready') {
     actions = `<div class="field"><label>${delivery ? 'Code de retrait présenté par le livreur' : 'Code de retrait du client'}</label>
       <input class="input" data-m="codeInput" data-live="handover" value="${esc(S.codeInput)}" maxlength="4" placeholder="ex. K7P2" style="text-transform:uppercase;letter-spacing:4px;font-weight:700" />
@@ -577,7 +576,8 @@ function merchantOrderCard(o) {
     <div class="row between"><p class="subtitle">Commande de Nadia</p>${badge(label, o.status === 'placed' ? 'warn' : o.status === 'ready' ? 'ok' : '')}</div>
     <p class="muted">Reçue à ${o.placedAt}${o.readyAt && o.status !== 'placed' ? ` · prête vers ${o.readyAt}` : ''} · code ${o.code}</p>
     ${delivery ? `<p>🛵 Livraison · ${o.address.city} · ${fmtDist(o.address.dist)}</p>` : '<p>🛍️ À emporter</p>'}
-    ${delivery && o.status === 'placed' ? `<p class="${waiting ? 'muted' : 'link'}">${waiting ? 'En attente de la confirmation de Karim, le livreur.' : 'Karim a confirmé la course.'}</p>` : ''}
+    ${delivery && o.status !== 'placed' ? `<p class="${o.confirmed ? 'link' : 'muted'}">${o.confirmed ? 'Livreur : Karim' : 'En attente d’un livreur (le premier qui accepte)…'}</p>` : ''}
+    <p class="muted">${delivery ? 'Repas payé par carte (CMI) · course en espèces au livreur' : 'Payée par carte (CMI)'}</p>
     ${!delivery && S.departure && o.status !== 'ready' ? `<p class="link">🚶 Nadia arrive vers ${S.departure.eta}</p>` : ''}
     ${o.items.map((l) => `<div><p>${l.qty} × ${l.name}</p>${l.opts.length ? `<p class="muted">${esc(l.opts.join(', '))}</p>` : ''}</div>`).join('')}
     ${o.reward ? '<p class="link">🎁 Dont 1 menu offert (fidélité)</p>' : ''}
@@ -592,7 +592,7 @@ const MERCHANT = {
     const o = S.order && ACTIVE.includes(S.order.status) ? S.order : null;
     const finished = [...S.history, S.order].filter((x) => x && DONE.includes(x.status));
     const count = 12 + finished.length;
-    const revenue = 18650 + finished.reduce((s, x) => s + x.meal, 0);
+    const revenue = 186500 + finished.reduce((s, x) => s + x.meal, 0);
     return { body: `
       <div class="row between"><h2 class="title">Commandes</h2>${badge(canOrder() ? 'Ouvert' : S.merchant.paused ? 'En pause' : 'Non publié', canOrder() ? 'ok' : 'off')}</div>
       <div class="tiles two"><div class="tile"><span class="muted">Aujourd'hui</span><b>${count} commandes</b></div><div class="tile"><span class="muted">Chiffre d'affaires</span><b>${fmt(revenue)}</b></div></div>
@@ -612,8 +612,8 @@ const MERCHANT = {
   shop() {
     return { body: `
       <h2 class="title">Ma boutique</h2>
-      <div class="card"><p class="subtitle">Paiements</p>${badge('Stripe ✓', 'ok')}<p class="muted">Paiements actifs : l'argent de vos ventes est versé sur votre compte bancaire.</p></div>
-      <div class="card"><p class="subtitle">Abonnement Zidozid Pro</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 9,99 € TTC par mois, sans engagement et sans commission sur vos ventes.</p>${btn('Gérer mon abonnement', 'toast', 'Ouvre le portail Stripe (carte, factures, résiliation).', 'secondary')}</div>
+      <div class="card"><p class="subtitle">Paiements</p>${badge('CMI ✓', 'ok')}<p class="muted">Paiement par carte actif (CMI) : l'argent de vos ventes arrive sur votre compte bancaire, jamais chez Zidozid. Espèces au comptoir acceptées.</p></div>
+      <div class="card"><p class="subtitle">Abonnement Zidozid Start</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 199 MAD TTC par mois (1 999 MAD par an), sans engagement et sans commission sur vos ventes. Formule Pro à 299 MAD : statistiques détaillées.</p>${btn('Gérer mon abonnement', 'toast', 'Ouvre le portail Stripe (carte, factures, résiliation).', 'secondary')}</div>
       <div class="card"><div class="row"><div class="grow"><p>Visible des clients</p><p class="muted">Votre commerce apparaît dans la recherche et sur votre QR code.</p></div>${sw(S.merchant.published, 'publish')}</div></div>
       <div class="card"><p class="subtitle">Pause</p>
         ${S.merchant.paused ? `<p>Pause en cours : plus de nouvelles commandes.</p>${btn('Reprendre les commandes', 'pause', 'off')}` : `<p class="muted">Un rush ? Mettez les commandes en pause.</p><div class="chips">${chip('15 min', 'pause', 'on')}${chip('30 min', 'pause', 'on')}${chip('1 h', 'pause', 'on')}${chip("Jusqu'à réactivation", 'pause', 'on')}</div>`}</div>
@@ -645,8 +645,8 @@ const MERCHANT = {
     const list = [...S.history, S.order].filter((o) => o && !ACTIVE.includes(o.status)).reverse();
     return { title: 'Historique', back: true, body: `
       ${list.map((o) => `<div class="card white"><div class="row between"><p><b>${o.code}</b> · Nadia</p>${badge(o.status === 'delivered' ? 'Livrée' : o.status === 'collected' ? 'Récupérée' : o.status === 'refused' ? 'Refusée' : 'Annulée', DONE.includes(o.status) ? 'ok' : 'off')}</div><p class="muted">${o.placedAt} · ${fmt(o.meal)}${o.fulfillment === 'delivery' ? ' · 🛵' : ''}</p></div>`).join('')}
-      <div class="card white"><div class="row between"><p><b>H4TZ</b> · Malik</p>${badge('Récupérée', 'ok')}</div><p class="muted">11:58 · 21,00 €</p></div>
-      <div class="card white"><div class="row between"><p><b>9QPA</b> · Sarah</p>${badge('Livrée', 'ok')}</div><p class="muted">11:32 · 9,50 € · 🛵</p></div>` };
+      <div class="card white"><div class="row between"><p><b>H4TZ</b> · Malik</p>${badge('Récupérée', 'ok')}</div><p class="muted">11:58 · 90,00 MAD</p></div>
+      <div class="card white"><div class="row between"><p><b>9QPA</b> · Sarah</p>${badge('Livrée', 'ok')}</div><p class="muted">11:32 · 40,00 MAD · 🛵</p></div>` };
   },
   account() {
     return { body: `
@@ -662,11 +662,10 @@ const MERCHANT = {
 // Écrans : livreur
 // ---------------------------------------------------------------------------
 function runCard(o) {
-  const isNew = o.status === 'placed' && !o.confirmed;
-  const label = isNew ? 'Nouvelle course' : { placed: 'Course confirmée', accepted: 'Acceptée', preparing: 'En préparation', ready: 'Prête', out_for_delivery: 'En livraison' }[o.status];
+  const isNew = !o.confirmed;
+  const label = isNew ? 'Mission disponible' : { placed: 'Course confirmée', accepted: 'Acceptée', preparing: 'En préparation', ready: 'Prête', out_for_delivery: 'En livraison' }[o.status];
   let body = '';
-  if (isNew) body = `${btn('Confirmer la course', 'confirm-run')}${btn('Décliner', 'decline-run', '', 'ghost')}`;
-  else if (o.status === 'placed') body = '<p class="muted">Course confirmée. En attente de l’acceptation du restaurant.</p>';
+  if (isNew) body = `<p class="muted">Le restaurant a accepté la commande. Premier arrivé, premier servi : l’adresse du client vous est révélée une fois la mission acceptée.</p>${btn('Accepter la mission', 'confirm-run')}`;
   else if (o.status === 'out_for_delivery') {
     body = `<p class="link">En route vers le client.</p>${btn('Itinéraire vers le client', 'toast', 'Ouvre Plans / Google Maps vers l’adresse du client.', 'secondary')}
       <div class="field"><label>Code de livraison donné par le client</label>
@@ -681,10 +680,11 @@ function runCard(o) {
   }
   return `<div class="card white">
     <div class="row between"><p class="subtitle">${label}</p>${badge(`Course : ${fmt(o.fee)}`, isNew ? 'warn' : 'ok')}</div>
-    <p>Retrait : Chez Samir, 12 rue de la Paix, Paris</p>
-    <p>Livraison : ${esc(o.address.line)}, ${o.address.pc} ${o.address.city}</p>
+    <p>Retrait : Chez Samir, 12 rue Ibn Batouta, Casablanca</p>
+    <p>${isNew ? `Livraison à ${o.address.city}` : `Livraison : ${esc(o.address.line)}, ${o.address.pc} ${o.address.city}`}</p>
     <p class="muted">${fmtDist(o.address.dist)} du restaurant · Client : Nadia · ${o.items.reduce((s, l) => s + l.qty, 0)} article(s)</p>
     ${o.instructions ? `<p class="link">Instructions : ${esc(o.instructions)}</p>` : ''}
+    ${!isNew && o.status === 'out_for_delivery' ? `<p class="link">Encaissez ${fmt(o.fee)} en espèces auprès du client.</p>` : ''}
     ${body}
     ${!isNew ? btn('Appeler le client', 'toast', `Appel vers ${o.phone}.`, 'ghost') : ''}
   </div>`;
@@ -692,10 +692,10 @@ function runCard(o) {
 
 const COURIER = {
   runs() {
-    const o = S.order && S.order.fulfillment === 'delivery' && ACTIVE.includes(S.order.status) ? S.order : null;
+    const o = S.order && S.order.fulfillment === 'delivery' && ACTIVE.includes(S.order.status) && S.order.status !== 'placed' ? S.order : null;
     return { body: `
       <h2 class="title">Mes courses</h2>
-      <div class="card"><div class="row"><div class="grow"><p>Je suis disponible</p><p class="muted">Vous recevez les courses des restaurants qui vous ont accepté.</p></div>${sw(S.courier.available, 'available')}</div></div>
+      <div class="card"><div class="row"><div class="grow"><p>Je suis disponible</p><p class="muted">Vous voyez les missions des restaurants qui vous ont accepté : la première acceptée est à vous.</p></div>${sw(S.courier.available, 'available')}</div></div>
       ${o ? runCard(o) : `<div class="card center"><p class="muted">${S.courier.available ? 'Aucune course en cours. Restez disponible : les nouvelles courses s’affichent ici.' : 'Vous êtes indisponible : aucune course ne vous est proposée.'}</p>
         ${S.courier.available ? btn('Recevoir une course test', 'test-run', '', 'secondary') : ''}</div>`}
       <div class="card"><p class="subtitle">Ne manquez aucune course</p><p class="muted">Activez les notifications pour être prévenu de chaque nouvelle course.</p></div>` };
@@ -705,10 +705,10 @@ const COURIER = {
     return { body: `
       <h2 class="title">Mes restaurants</h2>
       <p class="muted">Demandez à livrer pour les restaurants de votre secteur. Chaque restaurant accepte ou refuse votre demande.</p>
-      <div class="card white"><div class="row between"><p class="subtitle">Chez Samir</p>${badge('Accepté', 'ok')}</div><p class="muted">Paris · ${S.merchant.delivery ? `Course : ${fmt(S.merchant.fee)} · zone de ${fmtDist(S.merchant.radius)}` : 'Ne livre pas encore'}</p>${btn('Quitter', 'toast', 'Maquette : vous ne recevriez plus ses courses.', 'ghost')}</div>
-      ${kebab ? `<div class="card white"><div class="row between"><p class="subtitle">Le Kebab de Léa</p>${badge('En attente', 'warn')}</div><p class="muted">Lyon · le restaurant doit accepter votre demande.</p></div>` : ''}
+      <div class="card white"><div class="row between"><p class="subtitle">Chez Samir</p>${badge('Accepté', 'ok')}</div><p class="muted">Casablanca · ${S.merchant.delivery ? `Course : ${fmt(S.merchant.fee)} · zone de ${fmtDist(S.merchant.radius)}` : 'Ne livre pas encore'}</p>${btn('Quitter', 'toast', 'Maquette : vous ne recevriez plus ses courses.', 'ghost')}</div>
+      ${kebab ? `<div class="card white"><div class="row between"><p class="subtitle">Le Kebab de Léa</p>${badge('En attente', 'warn')}</div><p class="muted">Rabat · le restaurant doit accepter votre demande.</p></div>` : ''}
       <div class="field"><label>Trouver un restaurant</label><input class="input" placeholder="Nom, ville ou code postal" value="Kebab" data-a="noop" /></div>
-      ${kebab ? '' : `<div class="card white"><p class="subtitle">Le Kebab de Léa</p><p class="muted">5 Place Bellecour, Lyon</p>${btn('Demander à livrer', 'request-link', '', 'secondary')}</div>`}` };
+      ${kebab ? '' : `<div class="card white"><p class="subtitle">Le Kebab de Léa</p><p class="muted">8 avenue Mohammed V, Rabat</p>${btn('Demander à livrer', 'request-link', '', 'secondary')}</div>`}` };
   },
   earnings() {
     const c = S.courier;
@@ -719,19 +719,19 @@ const COURIER = {
         <div class="tile"><span class="muted">Semaine</span><b>${fmt(c.week)}</b></div>
         <div class="tile"><span class="muted">Mois</span><b>${fmt(c.month)}</b><span class="muted">${c.monthCount} courses</span></div>
       </div>
-      <p class="muted">Le client paie chaque course directement sur votre compte Stripe, sans commission Zidozid. Stripe la verse sur votre compte bancaire.</p>
+      <p class="muted">Le client vous règle chaque course en espèces à la livraison, sans commission Zidozid.</p>
       <p class="subtitle">Dernières courses</p>
       ${(S.order && S.order.status === 'delivered' ? [S.order] : []).concat(S.history.filter((h) => h.status === 'delivered').reverse()).map((o) => `<div class="row between"><span>Chez Samir<br><span class="muted">Aujourd'hui · ${o.address.city}</span></span><span>${fmt(o.fee)}</span></div>`).join('')}
-      <div class="row between"><span>Chez Samir<br><span class="muted">Aujourd'hui · 11:32 · Paris</span></span><span>3,50&nbsp;€</span></div>
-      <div class="row between"><span>Chez Samir<br><span class="muted">Aujourd'hui · 10:58 · Paris</span></span><span>3,50&nbsp;€</span></div>` };
+      <div class="row between"><span>Chez Samir<br><span class="muted">Aujourd'hui · 11:32 · Casablanca</span></span><span>15,00&nbsp;MAD</span></div>
+      <div class="row between"><span>Chez Samir<br><span class="muted">Aujourd'hui · 10:58 · Casablanca</span></span><span>15,00&nbsp;MAD</span></div>` };
   },
   account() {
     return { body: `
       <h2 class="title">Mon compte</h2>
       <p class="muted">Connecté en tant que livreur@zidozid.test</p>
-      <div class="card"><p class="subtitle">Mon profil livreur</p><p>Karim L.</p><p class="muted">Auto-entrepreneur · SIRET 882 123 456 00015</p><p class="muted">Scooter · 06 12 34 56 78</p></div>
-      <div class="card"><p class="subtitle">Paiements</p>${badge('Stripe ✓', 'ok')}<p class="muted">Paiements actifs : vos courses sont versées sur votre compte bancaire. Stripe a vérifié votre identité et votre SIRET.</p></div>
-      <div class="card"><p class="subtitle">Abonnement Zidozid Livreur</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 9,99 € TTC par mois, sans engagement et sans commission sur vos courses.</p>${btn('Gérer mon abonnement', 'toast', 'Ouvre le portail Stripe (carte, factures, résiliation).', 'secondary')}</div>
+      <div class="card"><p class="subtitle">Mon profil livreur</p><p>Karim L.</p><p class="muted">Indépendant · ICE 002 345 678 000 012</p><p class="muted">Scooter · 06 12 34 56 78</p></div>
+      <div class="card"><p class="subtitle">Paiements</p>${badge('Espèces', 'ok')}<p class="muted">Le client vous règle la course en espèces à la livraison, après avoir donné son code. Aucune commission Zidozid.</p></div>
+      <div class="card"><p class="subtitle">Abonnement Zidozid Livreur Start</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 149 MAD TTC par mois (1 499 MAD par an), sans engagement et sans commission sur vos courses. Formule Pro à 249 MAD : 2 courses à la fois.</p>${btn('Gérer mon abonnement', 'toast', 'Ouvre le portail Stripe (carte, factures, résiliation).', 'secondary')}</div>
       ${btn("Passer à l'espace client", 'role', 'client', 'secondary')}
       ${btn("Passer à l'espace commerçant", 'role', 'merchant', 'secondary')}` };
   },
@@ -739,7 +739,7 @@ const COURIER = {
 const SCREENS = { client: CLIENT, merchant: MERCHANT, courier: COURIER };
 
 // ---------------------------------------------------------------------------
-// Feuilles modales : produit et paiement Stripe
+// Feuilles modales : produit et paiement CMI
 // ---------------------------------------------------------------------------
 function itemSheet() {
   const m = S.modal;
@@ -769,15 +769,13 @@ function paySheet() {
   const p = m.steps[m.i];
   return `<div class="overlay"><div class="sheet" data-stop="1">
     <div class="grab"></div>
-    <div class="row between"><span class="stripe">stripe</span><span class="muted">Paiement ${m.i + 1}/${m.steps.length}</span></div>
-    <p class="muted">${p.kind === 'meal' ? 'Votre repas, payé directement au restaurant' : 'Votre livraison, payée directement au livreur'}</p>
+    <div class="row between"><span class="stripe" style="color:#0a5aa8">CMI</span><span class="muted">Paiement sécurisé 3D Secure</span></div>
+    <p class="muted">Votre repas, payé par carte sur le compte du restaurant</p>
     <p class="subtitle">${p.who}</p>
     <p class="amount">${fmt(p.amount)}</p>
-    ${btn('Payer avec Apple Pay', 'pay-step', '', 'dark')}
-    <p class="muted center" style="text-align:center">ou payer par carte</p>
     <div class="cardline"><span class="brand">VISA</span><span class="grow">•••• 4242</span><span class="muted">12/28</span></div>
     ${btn(`Payer ${fmt(p.amount)}`, 'pay-step')}
-    <p class="small">Montant seulement autorisé : vous n'êtes débité que si le restaurant accepte la commande. Aucune commission Zidozid.</p>
+    <p class="small">${isDelivery() ? `La course (${fmt(S.merchant.fee)}) se règle en espèces au livreur. ` : ''}Aucune commission Zidozid : l’argent va au restaurant.</p>
     ${btn('Annuler', 'pay-cancel', '', 'ghost')}
   </div></div>`;
 }
@@ -797,8 +795,8 @@ function nextStep() {
     };
   }
   const d = o.fulfillment === 'delivery';
-  if (o.status === 'placed' && d && !o.confirmed) return { text: 'Livreur : Karim reçoit « Nouvelle course ». Confirmez-la (ou déclinez : la commande est annulée, rien n’est débité).', role: 'courier' };
-  if (o.status === 'placed') return { text: 'Restaurant : choisissez le délai et acceptez. Les paiements sont alors débités (repas, et course pour une livraison).', role: 'merchant' };
+    if (o.status === 'placed') return { text: 'Restaurant : choisissez le délai et acceptez. Pour une livraison, la mission est alors proposée aux livreurs.', role: 'merchant' };
+  if (d && !o.confirmed && o.status !== 'placed') return { text: 'Livreur : Karim voit « Mission disponible » (ville et course, sans adresse). Acceptez-la : le premier qui accepte l’emporte.', role: 'courier' };
   if (o.status === 'accepted' || o.status === 'preparing') return { text: `Restaurant : lancez la préparation puis « Commande prête ».${!d ? ' Côté client, essayez « Je pars maintenant ».' : ''}`, role: 'merchant' };
   if (o.status === 'ready' && !d) return { text: `Restaurant : le client montre son code ${o.code} au comptoir. Saisissez-le pour remettre la commande.`, role: 'merchant' };
   if (o.status === 'ready') return { text: `Restaurant : Karim montre le code de retrait ${o.code}. Saisissez-le et « Remettre au livreur ».`, role: 'merchant' };
@@ -864,7 +862,6 @@ function placeOrder() {
   };
   S.cart = []; S.rewardKey = null; S.note = ''; S.departure = null;
   notify('merchant', delivery ? 'Nouvelle commande à livrer 🛵' : 'Nouvelle commande 🔔', `Nadia · ${fmt(S.order.meal)}${reward ? ' · menu offert' : ''}`);
-  if (delivery) notify('courier', 'Nouvelle course 🛵', `Chez Samir → ${S.order.address.city} · ${fmt(S.order.fee)}. Confirmez la course.`);
 }
 function finishOrder(status) {
   const o = S.order;
@@ -882,7 +879,7 @@ function failOrder(status, extra = {}) {
 function testOrder(delivery) {
   const item = findItem('americain');
   S.cart = [{ key: 'americain|', id: 'americain', name: item.name, opts: [], unit: 950, base: 950, qty: 2, loyalty: true }];
-  if (delivery) { S.fulfillment = 'delivery'; S.address = ADDRESSES[0]; S.addrQuery = '5 Rue Saint-Augustin, 75002 Paris'; S.phone = '06 98 76 54 32'; }
+  if (delivery) { S.fulfillment = 'delivery'; S.address = ADDRESSES[0]; S.addrQuery = '5 Rue Mustapha El Maani, 20250 Casablanca'; S.phone = '06 98 76 54 32'; }
   else S.fulfillment = 'pickup';
   placeOrder();
 }
@@ -936,23 +933,21 @@ const A = {
     const meal = cartSub() - cartDiscount();
     const steps = [];
     if (meal > 0) steps.push({ kind: 'meal', who: 'Chez Samir', amount: meal });
-    if (isDelivery()) steps.push({ kind: 'delivery', who: 'Karim L., livreur', amount: S.merchant.fee });
-    if (!steps.length) { placeOrder(); S.stacks.client = [{ s: 'orders' }, { s: 'order', id: 'current' }]; toast('Commande envoyée : menu offert, rien à payer.'); return; }
+        if (!steps.length) { placeOrder(); S.stacks.client = [{ s: 'orders' }, { s: 'order', id: 'current' }]; toast('Commande envoyée : menu offert, rien à payer.'); return; }
     S.modal = { type: 'pay', steps, i: 0 };
   },
   'pay-step'() {
     const m = S.modal;
-    if (m.i < m.steps.length - 1) { m.i += 1; toast('Repas autorisé. Deuxième paiement : la course.'); return; }
     S.modal = null; placeOrder();
     S.stacks.client = [{ s: 'orders' }, { s: 'order', id: 'current' }];
-    toast('Commande envoyée au restaurant');
+    toast('Paiement accepté : commande envoyée au restaurant');
   },
-  'pay-cancel'() { S.modal = null; toast("Paiement annulé : aucun montant n'a été débité. Votre panier est conservé."); },
+  'pay-cancel'() { S.modal = null; toast("Paiement annulé : votre panier est conservé."); },
   'client-cancel'() {
     failOrder('cancelled', { cancelledBy: 'customer' });
     notify('merchant', 'Commande annulée', `Nadia a annulé sa commande ${S.order.code}.`);
     if (S.order.fulfillment === 'delivery') notify('courier', 'Course annulée', `Le client a annulé la commande ${S.order.code}.`);
-    toast('Commande annulée, rien n’a été débité.');
+    toast('Commande annulée : le restaurant vous rembourse le repas.');
   },
   depart(v) { S.departure = { eta: inMinutes(Number(v)) }; notify('merchant', 'Nadia est en route 🚶', `Arrivée vers ${S.departure.eta} · commande ${S.order.code}`); },
 
@@ -960,16 +955,16 @@ const A = {
   prep(v) { S.merchant.prep = Number(v); },
   accept() {
     const o = S.order; o.status = 'accepted'; o.readyAt = inMinutes(S.merchant.prep);
-    notify('client', 'Commande acceptée ✅', o.fulfillment === 'delivery' ? 'Chez Samir prépare votre commande, Karim la livrera.' : `Chez Samir prépare votre commande, prête vers ${o.readyAt}.`);
-    if (o.fulfillment === 'delivery') notify('courier', 'Course confirmée', `Chez Samir prépare la commande ${o.code}, prête vers ${o.readyAt}.`);
-    toast(o.fulfillment === 'delivery' ? 'Acceptée : repas et course débités.' : 'Acceptée : paiement débité.');
+    notify('client', 'Commande acceptée ✅', o.fulfillment === 'delivery' ? 'Chez Samir prépare votre commande, un livreur va la prendre.' : `Chez Samir prépare votre commande, prête vers ${o.readyAt}.`);
+    if (o.fulfillment === 'delivery') notify('courier', 'Nouvelle mission 🛵', `Chez Samir → ${o.address.city} · ${fmt(o.fee)} en espèces. Le premier qui accepte l’emporte.`);
+    toast(o.fulfillment === 'delivery' ? 'Acceptée : la mission est proposée aux livreurs.' : 'Acceptée.');
   },
   refusing() { S.refusing = !S.refusing; },
   refuse(v) {
     failOrder('refused', { reason: v }); S.refusing = false;
-    notify('client', 'Commande non acceptée', `Chez Samir n’a pas pu accepter votre commande (${v}). Vous n’avez pas été débité.`);
+    notify('client', 'Commande non acceptée', `Chez Samir n’a pas pu accepter votre commande (${v}). Votre remboursement est à la charge du restaurant.`);
     if (S.order.fulfillment === 'delivery') notify('courier', 'Course annulée', `Chez Samir n’a pas accepté la commande ${S.order.code}.`);
-    toast('Commande refusée : aucun débit pour le client.');
+    toast('Commande refusée : remboursez le client dans votre back-office CMI.');
   },
   mstatus(v) {
     S.order.status = v;
@@ -1006,18 +1001,12 @@ const A = {
     S.courier.available = !S.courier.available;
   },
   'test-run'() { testOrder(true); S.notifs.courier = []; toast('Course test reçue : Nadia commande 2 menus en livraison.'); },
-  'confirm-run'() { S.order.confirmed = true; toast('Course confirmée. Le restaurant peut accepter.'); },
-  'decline-run'() {
-    failOrder('cancelled', { cancelledBy: 'courier' });
-    notify('client', 'Livraison impossible', 'Aucun livreur n’a pu prendre votre commande chez Chez Samir. Vous n’avez pas été débité.');
-    notify('merchant', 'Commande annulée', `Le livreur a décliné la commande ${S.order.code}.`);
-    toast('Course déclinée : la commande est annulée, rien n’est débité.');
-  },
+  'confirm-run'() { S.order.confirmed = true; toast('Mission acceptée : vous êtes le livreur de cette commande.'); },
   deliver() {
     if (S.codeInput.trim() !== S.order.dcode) { S.codeError = true; return; }
     S.codeInput = ''; S.codeError = false; finishOrder('delivered');
     notify('client', 'Commande livrée 🎉', 'Bon appétit ! Merci d’avoir commandé chez Chez Samir.');
-    toast(`Livrée ! ${fmt(S.order.fee)} ajoutés à vos revenus.`);
+    toast(`Livrée ! Course de ${fmt(S.order.fee)} encaissée en espèces.`);
   },
   'request-link'() { S.courier.links.kebab = 'pending'; toast('Demande envoyée au Kebab de Léa.'); },
 };
