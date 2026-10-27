@@ -209,8 +209,8 @@ body.in-app { height: 100vh; overflow: hidden; background: var(--bg); }
       <h2>Ce que montre la maquette</h2>
       <ul class="guide-list">
         <li>Client : recherche, menu avec options, menu offert (fidélité), retrait ou livraison, repas payé par carte (CMI) et course en espèces au livreur, suivi en direct.</li>
-        <li>Restaurant : commandes, menu, boutique, réglages de livraison et livreurs.</li>
-        <li>Livreur : disponibilité, missions (premier arrivé), codes de retrait et de livraison, revenus, abonnement.</li>
+        <li>Restaurant : commandes, menu, boutique, réglages de livraison et livreurs, abonnement (essai sans carte, paiement CMI, échéance).</li>
+        <li>Livreur : disponibilité, missions (premier arrivé), codes de retrait et de livraison, revenus, abonnement (Start / Pro).</li>
       </ul>
       <p class="small" style="margin-top:10px">Démo : aucune donnée réelle, aucun paiement. Les montants (en dirhams, MAD) sont ceux du restaurant de démonstration « Chez Samir », à Casablanca.</p><p style="margin-top:12px"><a href="/" style="color:var(--link);font-weight:700">← Retour à zidozid.fr</a></p>
     </div>
@@ -267,6 +267,8 @@ function initialState() {
     unavailable: {}, // produits en rupture
     merchant: { published: true, paused: false, delivery: true, fee: 1500, radius: 3000, lea: 'pending', prep: 10 },
     courier: { available: true, today: 3000, todayCount: 2, week: 10500, month: 42000, monthCount: 28, links: { kebab: null } },
+    sub: { merchant: { st: 'trial', plan: 'start', interval: null, until: Date.now() + 23 * 86400000 }, courier: { st: 'trial', plan: 'start', interval: null, until: Date.now() + 23 * 86400000 } },
+    subDraft: { merchant: { plan: 'pro', interval: 'month', terms: false }, courier: { plan: 'pro', interval: 'month', terms: false } },
     notifs: { client: [], merchant: [], courier: [] },
     modal: null, banner: null, toast: null, codeInput: '', refusing: false, departure: null, search: '',
   };
@@ -291,7 +293,8 @@ const cartCount = () => S.cart.reduce((s, l) => s + l.qty, 0);
 const isDelivery = () => S.merchant.delivery && S.fulfillment === 'delivery';
 const phoneOk = (p) => /^\+?\d[\d .-]{8,18}\d$/.test(p.trim());
 const courierBusy = () => !!S.order && S.order.fulfillment === 'delivery' && ACTIVE.includes(S.order.status);
-const canOrder = () => S.merchant.published && !S.merchant.paused;
+const subValid = (role) => S.sub[role].until > Date.now();
+const canOrder = () => S.merchant.published && !S.merchant.paused && subValid('merchant');
 function cartDiscount() {
   if (!S.rewardKey || S.loyalty.rewards < 1) return 0;
   const line = S.cart.find((l) => l.key === S.rewardKey);
@@ -350,7 +353,7 @@ const CLIENT = {
       <input class="input" placeholder="Nom, ville ou code postal" data-a="noop" />
       <div class="chips">${chip('📍 Utiliser ma position', 'toast', 'Position utilisée une seule fois, jamais enregistrée.', true)}</div>
       <div class="card click" data-a="open-merchant">
-        <div class="row between"><p class="subtitle">Chez Samir</p>${canOrder() ? badge('Ouvert', 'ok') : badge(S.merchant.paused ? 'En pause' : 'Non publié', 'off')}</div>
+        <div class="row between"><p class="subtitle">Chez Samir</p>${canOrder() ? badge('Ouvert', 'ok') : badge(S.merchant.paused ? 'En pause' : !subValid('merchant') ? 'Abonnement échu' : 'Non publié', 'off')}</div>
         <p class="muted">Snack · 12 rue Ibn Batouta, Casablanca · 350 m</p>
         ${S.merchant.delivery ? `<p class="link">🛵 Livraison possible · ${fmt(S.merchant.fee)}</p>` : ''}
         <p class="muted">🎁 Votre carte : ${S.loyalty.count}/9 · ${S.loyalty.rewards} menu offert</p>
@@ -367,7 +370,7 @@ const CLIENT = {
     return { title: 'Chez Samir', back: true, body: `
       <h2 class="title">Chez Samir</h2>
       <p class="muted">Snack · 12 rue Ibn Batouta, 20250 Casablanca</p>
-      <div class="row">${canOrder() ? badge('Ouvert · prêt en 12 min', 'ok') : badge(S.merchant.paused ? 'En pause' : 'Non publié', 'off')}</div>
+      <div class="row">${canOrder() ? badge('Ouvert · prêt en 12 min', 'ok') : badge(S.merchant.paused ? 'En pause' : !subValid('merchant') ? 'Abonnement échu' : 'Non publié', 'off')}</div>
       ${S.merchant.delivery ? `<p class="link">🛵 Livraison possible · ${fmt(S.merchant.fee)}</p>` : ''}
       <p>Tacos, sandwichs et assiettes maison.</p>
       <div class="card">
@@ -594,7 +597,7 @@ const MERCHANT = {
     const count = 12 + finished.length;
     const revenue = 186500 + finished.reduce((s, x) => s + x.meal, 0);
     return { body: `
-      <div class="row between"><h2 class="title">Commandes</h2>${badge(canOrder() ? 'Ouvert' : S.merchant.paused ? 'En pause' : 'Non publié', canOrder() ? 'ok' : 'off')}</div>
+      <div class="row between"><h2 class="title">Commandes</h2>${badge(canOrder() ? 'Ouvert' : S.merchant.paused ? 'En pause' : !subValid('merchant') ? 'Abonnement échu' : 'Non publié', canOrder() ? 'ok' : 'off')}</div>
       <div class="tiles two"><div class="tile"><span class="muted">Aujourd'hui</span><b>${count} commandes</b></div><div class="tile"><span class="muted">Chiffre d'affaires</span><b>${fmt(revenue)}</b></div></div>
       ${o ? merchantOrderCard(o) : `<div class="card center"><p class="muted">Aucune commande en cours. Les nouvelles commandes arrivent ici avec une sonnerie.</p>${btn('Recevoir une commande test', 'test-order', '', 'secondary')}</div>`}
       <div class="card"><p class="subtitle">Ne manquez aucune commande</p><p class="muted">Activez les notifications pour être alerté même téléphone verrouillé.</p></div>` };
@@ -613,7 +616,7 @@ const MERCHANT = {
     return { body: `
       <h2 class="title">Ma boutique</h2>
       <div class="card"><p class="subtitle">Paiements</p>${badge('CMI ✓', 'ok')}<p class="muted">Paiement par carte actif (CMI) : l'argent de vos ventes arrive sur votre compte bancaire, jamais chez Zidozid. Espèces au comptoir acceptées.</p></div>
-      <div class="card"><p class="subtitle">Abonnement Zidozid Start</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 199 MAD TTC par mois (1 999 MAD par an), sans prélèvement automatique ni commission sur vos ventes. Formule Pro à 299 MAD : statistiques détaillées.</p>${btn('Renouveler mon abonnement', 'toast', 'Ouvre la page de paiement CMI : un mois ou un an de plus, sans prélèvement automatique.', 'secondary')}</div>
+      ${subscriptionCard('merchant')}
       <div class="card"><div class="row"><div class="grow"><p>Visible des clients</p><p class="muted">Votre commerce apparaît dans la recherche et sur votre QR code.</p></div>${sw(S.merchant.published, 'publish')}</div></div>
       <div class="card"><p class="subtitle">Pause</p>
         ${S.merchant.paused ? `<p>Pause en cours : plus de nouvelles commandes.</p>${btn('Reprendre les commandes', 'pause', 'off')}` : `<p class="muted">Un rush ? Mettez les commandes en pause.</p><div class="chips">${chip('15 min', 'pause', 'on')}${chip('30 min', 'pause', 'on')}${chip('1 h', 'pause', 'on')}${chip("Jusqu'à réactivation", 'pause', 'on')}</div>`}</div>
@@ -731,12 +734,55 @@ const COURIER = {
       <p class="muted">Connecté en tant que livreur@zidozid.test</p>
       <div class="card"><p class="subtitle">Mon profil livreur</p><p>Karim L.</p><p class="muted">Indépendant · ICE 002 345 678 000 012</p><p class="muted">Scooter · 06 12 34 56 78</p></div>
       <div class="card"><p class="subtitle">Paiements</p>${badge('Espèces', 'ok')}<p class="muted">Le client vous règle la course en espèces à la livraison, après avoir donné son code. Aucune commission Zidozid.</p></div>
-      <div class="card"><p class="subtitle">Abonnement Zidozid Livreur Start</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 149 MAD TTC par mois (1 499 MAD par an), sans prélèvement automatique ni commission sur vos courses. Formule Pro à 249 MAD : 2 courses à la fois.</p>${btn('Renouveler mon abonnement', 'toast', 'Ouvre la page de paiement CMI : un mois ou un an de plus, sans prélèvement automatique.', 'secondary')}</div>
+      ${subscriptionCard('courier')}
       ${btn("Passer à l'espace client", 'role', 'client', 'secondary')}
       ${btn("Passer à l'espace commerçant", 'role', 'merchant', 'secondary')}` };
   },
 };
 const SCREENS = { client: CLIENT, merchant: MERCHANT, courier: COURIER };
+
+// ---------------------------------------------------------------------------
+// Abonnement : essai sans carte, puis paiement CMI d'une période (sans prélèvement automatique)
+// ---------------------------------------------------------------------------
+const SUB_PRICES = { merchant: { start: { month: 19900, year: 199900 }, pro: { month: 29900, year: 299900 } }, courier: { start: { month: 14900, year: 149900 }, pro: { month: 24900, year: 249900 } } };
+const dayFmt = (t) => new Date(t).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+const subFeatures = { merchant: { start: 'Click & Collect, livraison, QR code, fidélité, notifications.', pro: 'Tout Start, plus les statistiques détaillées (ventes par jour, produits les plus vendus).' }, courier: { start: 'Missions de livraison, une course à la fois.', pro: "Jusqu'à 2 courses en même temps." } };
+function subscriptionCard(role) {
+  const sb = S.sub[role]; const d = S.subDraft[role];
+  const valid = subValid(role);
+  const price = SUB_PRICES[role][d.plan][d.interval];
+  const title = role === 'merchant' ? 'Abonnement Zidozid' : 'Abonnement Zidozid Livreur';
+  const status = valid
+    ? (sb.st === 'trial' ? `<p>Essai gratuit jusqu'au ${dayFmt(sb.until)}.</p>` : `<p>Abonnement payé jusqu'au ${dayFmt(sb.until)}. Il ne se renouvelle pas tout seul.</p>`)
+    : `<p class="error">Votre abonnement est terminé : ${role === 'merchant' ? 'plus de commandes' : 'plus de missions'}. Payez une période pour reprendre.</p>`;
+  return `<div class="card"><p class="subtitle">${title}</p>
+    ${valid ? badge(sb.plan === 'pro' ? 'Pro' : 'Start', 'ok') : ''}
+    ${status}
+    <div class="chips">${chip('Start', 'sub-plan', role + '|start', d.plan === 'start')}${chip('Pro', 'sub-plan', role + '|pro', d.plan === 'pro')}</div>
+    <div class="chips">${chip('Mensuel', 'sub-interval', role + '|month', d.interval === 'month')}${chip('Annuel', 'sub-interval', role + '|year', d.interval === 'year')}</div>
+    <p><b>${fmt(price)}</b> TTC par ${d.interval === 'month' ? 'mois' : 'an'}</p>
+    <p class="muted">${subFeatures[role][d.plan]}</p>
+    <p class="muted">Chaque paiement ajoute un mois ou un an. Aucun prélèvement automatique : vous renouvelez quand vous le souhaitez.</p>
+    <div class="row"><div class="grow"><p class="muted">J'ai lu et j'accepte les conditions générales d'abonnement.</p></div>${sw(d.terms, 'sub-terms', role)}</div>
+    ${btn(`${valid ? 'Renouveler : payer' : 'Payer'} ${fmt(price)} par carte`, 'sub-pay', role, 'primary', d.terms ? '' : 'disabled')}
+    ${btn("Démo : simuler la fin de l'abonnement", 'sub-expire', role, 'ghost')}
+  </div>`;
+}
+function subPaySheet() {
+  const m = S.modal; const d = S.subDraft[m.role];
+  const amount = SUB_PRICES[m.role][d.plan][d.interval];
+  return `<div class="overlay"><div class="sheet" data-stop="1">
+    <div class="grab"></div>
+    <div class="row between"><span class="stripe" style="color:#0a5aa8">CMI</span><span class="muted">Paiement sécurisé 3D Secure</span></div>
+    <p class="muted">Abonnement Zidozid, payé par carte sur le contrat de Zidozid</p>
+    <p class="subtitle">Formule ${d.plan === 'pro' ? 'Pro' : 'Start'} · ${d.interval === 'month' ? '1 mois' : '1 an'}</p>
+    <p class="amount">${fmt(amount)}</p>
+    <div class="cardline"><span class="brand">VISA</span><span class="grow">•••• 4242</span><span class="muted">12/28</span></div>
+    ${btn(`Payer ${fmt(amount)}`, 'sub-pay-confirm')}
+    <p class="small">Aucun prélèvement automatique : ce paiement ouvre une seule période.</p>
+    ${btn('Annuler', 'sub-pay-cancel', '', 'ghost')}
+  </div></div>`;
+}
 
 // ---------------------------------------------------------------------------
 // Feuilles modales : produit et paiement CMI
@@ -835,6 +881,7 @@ function render() {
     ${isRoot ? `<nav class="tabbar">${TABS[S.role].map(([id, ic, l]) => `<button class="tab ${t.s === id ? 'on' : ''}" data-a="tab" data-v="${id}"><span>${ic}</span>${l}</button>`).join('')}</nav>` : ''}
     ${S.modal?.type === 'item' ? itemSheet() : ''}
     ${S.modal?.type === 'pay' ? paySheet() : ''}
+    ${S.modal?.type === 'subpay' ? subPaySheet() : ''}
     ${S.banner ? `<div class="banner"><img src="${LOGO}" alt=""><div class="grow"><small>ZIDOZID · maintenant</small><b>${esc(S.banner.title)}</b><span class="muted" style="font-size:13px">${esc(S.banner.body)}</span></div></div>` : ''}
     ${S.toast ? `<div class="toast">${esc(S.toast)}</div>` : ''}`;
   phone.querySelector('.content').scrollTop = scroll;
@@ -993,10 +1040,40 @@ const A = {
   fee(v) { S.merchant.fee = Number(v); },
   radius(v) { S.merchant.radius = Number(v); },
   lea(v) { S.merchant.lea = v; toast(v === 'approved' ? 'Léa est acceptée : elle recevra vos courses.' : 'Demande refusée.'); },
+  // Abonnement
+  'sub-plan'(v) { const [r, p] = v.split('|'); S.subDraft[r].plan = p; },
+  'sub-interval'(v) { const [r, i] = v.split('|'); S.subDraft[r].interval = i; },
+  'sub-terms'(v) { S.subDraft[v].terms = !S.subDraft[v].terms; },
+  'sub-pay'(v) { if (!S.subDraft[v].terms) return; S.modal = { type: 'subpay', role: v }; },
+  'sub-pay-cancel'() { S.modal = null; toast('Paiement annulé : rien n’a changé.'); },
+  'sub-pay-confirm'() {
+    const role = S.modal.role; const d = S.subDraft[role]; const sb = S.sub[role];
+    const day = 86400000; const len = d.interval === 'year' ? 365 * day : 30 * day;
+    let base = Date.now();
+    if (subValid(role)) {
+      if (sb.st === 'trial' || sb.plan === d.plan) base = sb.until;
+      else {
+        // Autre formule : le temps déjà payé est converti au prorata des prix journaliers.
+        const oldDaily = SUB_PRICES[role][sb.plan][sb.interval] / (sb.interval === 'year' ? 365 : 30);
+        const newDaily = SUB_PRICES[role][d.plan][d.interval] / (d.interval === 'year' ? 365 : 30);
+        base += ((sb.until - base) * oldDaily) / newDaily;
+      }
+    }
+    S.sub[role] = { st: 'paid', plan: d.plan, interval: d.interval, until: base + len };
+    S.modal = null;
+    toast(`Paiement accepté : abonnement ${d.plan === 'pro' ? 'Pro' : 'Start'} payé jusqu'au ${dayFmt(base + len)}.`);
+  },
+  'sub-expire'(v) {
+    S.sub[v].until = Date.now() - 1000;
+    if (v === 'courier') S.courier.available = false;
+    toast("Abonnement échu : " + (v === 'merchant' ? 'le restaurant ne reçoit plus de commandes.' : 'le livreur ne reçoit plus de missions.'));
+  },
+
   'test-order'() { testOrder(false); S.notifs.merchant = []; toast('Commande test reçue (à emporter).'); },
 
   // Livreur
   available() {
+    if (!subValid('courier')) { toast('Abonnement échu : payez une période pour reprendre les missions.'); return; }
     if (S.courier.available && courierBusy()) { toast('Terminez d’abord la course en cours.'); return; }
     S.courier.available = !S.courier.available;
   },
