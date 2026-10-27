@@ -613,7 +613,7 @@ const MERCHANT = {
     return { body: `
       <h2 class="title">Ma boutique</h2>
       <div class="card"><p class="subtitle">Paiements</p>${badge('CMI ✓', 'ok')}<p class="muted">Paiement par carte actif (CMI) : l'argent de vos ventes arrive sur votre compte bancaire, jamais chez Zidozid. Espèces au comptoir acceptées.</p></div>
-      <div class="card"><p class="subtitle">Abonnement Zidozid Start</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 199 MAD TTC par mois (1 999 MAD par an), sans engagement et sans commission sur vos ventes. Formule Pro à 299 MAD : statistiques détaillées.</p>${btn('Gérer mon abonnement', 'toast', 'Ouvre le portail Stripe (carte, factures, résiliation).', 'secondary')}</div>
+      <div class="card"><p class="subtitle">Abonnement Zidozid Start</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 199 MAD TTC par mois (1 999 MAD par an), sans prélèvement automatique ni commission sur vos ventes. Formule Pro à 299 MAD : statistiques détaillées.</p>${btn('Renouveler mon abonnement', 'toast', 'Ouvre la page de paiement CMI : un mois ou un an de plus, sans prélèvement automatique.', 'secondary')}</div>
       <div class="card"><div class="row"><div class="grow"><p>Visible des clients</p><p class="muted">Votre commerce apparaît dans la recherche et sur votre QR code.</p></div>${sw(S.merchant.published, 'publish')}</div></div>
       <div class="card"><p class="subtitle">Pause</p>
         ${S.merchant.paused ? `<p>Pause en cours : plus de nouvelles commandes.</p>${btn('Reprendre les commandes', 'pause', 'off')}` : `<p class="muted">Un rush ? Mettez les commandes en pause.</p><div class="chips">${chip('15 min', 'pause', 'on')}${chip('30 min', 'pause', 'on')}${chip('1 h', 'pause', 'on')}${chip("Jusqu'à réactivation", 'pause', 'on')}</div>`}</div>
@@ -731,7 +731,7 @@ const COURIER = {
       <p class="muted">Connecté en tant que livreur@zidozid.test</p>
       <div class="card"><p class="subtitle">Mon profil livreur</p><p>Karim L.</p><p class="muted">Indépendant · ICE 002 345 678 000 012</p><p class="muted">Scooter · 06 12 34 56 78</p></div>
       <div class="card"><p class="subtitle">Paiements</p>${badge('Espèces', 'ok')}<p class="muted">Le client vous règle la course en espèces à la livraison, après avoir donné son code. Aucune commission Zidozid.</p></div>
-      <div class="card"><p class="subtitle">Abonnement Zidozid Livreur Start</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 149 MAD TTC par mois (1 499 MAD par an), sans engagement et sans commission sur vos courses. Formule Pro à 249 MAD : 2 courses à la fois.</p>${btn('Gérer mon abonnement', 'toast', 'Ouvre le portail Stripe (carte, factures, résiliation).', 'secondary')}</div>
+      <div class="card"><p class="subtitle">Abonnement Zidozid Livreur Start</p><p>Essai gratuit jusqu'au ${trialEnd}.</p><p class="muted">Ensuite 149 MAD TTC par mois (1 499 MAD par an), sans prélèvement automatique ni commission sur vos courses. Formule Pro à 249 MAD : 2 courses à la fois.</p>${btn('Renouveler mon abonnement', 'toast', 'Ouvre la page de paiement CMI : un mois ou un an de plus, sans prélèvement automatique.', 'secondary')}</div>
       ${btn("Passer à l'espace client", 'role', 'client', 'secondary')}
       ${btn("Passer à l'espace commerçant", 'role', 'merchant', 'secondary')}` };
   },
