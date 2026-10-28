@@ -6,7 +6,7 @@
 - Marché cible : Maroc. Devise de la démonstration et du diagnostic : MAD (dirham marocain, DH).
 - Site de présentation, lancement Maroc en préparation. Aucune commande, inscription applicative ou transaction réelle sur ce site.
 - Modèle : abonnement professionnel pour restaurants et livreurs indépendants, 0 % de commission Zidozid sur les commandes.
-- Tarifs Maroc et modalités d’essai non annoncés. Ne pas reprendre les tarifs européens ni les convertir en MAD.
+- Tarifs TTC en dirhams (DH), 30 jours d’essai sans carte : restaurant Start 199 DH/mois ou 1 999 DH/an, Pro 299 DH/mois ou 2 999 DH/an ; livreur Start 149 DH/mois ou 1 499 DH/an, Pro 249 DH/mois ou 2 499 DH/an. Abonnements payés par carte CMI, un mois ou un an à la fois, sans prélèvement automatique.
 - Moyens de paiement locaux et ouverture par ville à confirmer avant lancement. Ne pas affirmer qu’un prestataire local est intégré.
 - Trois espaces : client, restaurant, livreur. À emporter et livraison selon zone et disponibilité.
 - Fidélité : 9 menus formules éligibles payés et remis chez un même restaurant = 1 menu formule offert ; suppléments payants exclus de la gratuité.
@@ -16,6 +16,7 @@
 - [Accueil](https://zidozid.fr/)
 - [Démo des trois espaces](https://zidozid.fr/demo/)
 - [Diagnostic en dirhams](https://zidozid.fr/diagnostic.html)
+- [Conditions générales d’abonnement](https://zidozid.fr/cgu-abonnement/)
 - [Mentions légales](https://zidozid.fr/mentions-legales/)
 - [Confidentialité](https://zidozid.fr/confidentialite/)
 
