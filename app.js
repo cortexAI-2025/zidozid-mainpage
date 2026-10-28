@@ -95,7 +95,7 @@ if ($('#demo-client')) {
   document.querySelectorAll('input[name="mode"]').forEach(input => input.addEventListener('change', renderCart));
   const statusText = () => {
     if (!order) return 'Votre commande apparaîtra ici.';
-    return ({ waiting_courier: 'En attente de confirmation du livreur.', pending: 'Envoyée au restaurant. En attente de confirmation.', accepted: 'Commande acceptée. Préparation imminente.', preparing: 'Votre commande est en préparation.', ready: order.mode === 'delivery' ? 'Commande prête pour le livreur.' : 'Commande prête. Code de retrait : ZD24.', transit: 'Votre livreur est en route. Code de livraison : 4826.', done: order.mode === 'delivery' ? 'Commande livrée. Bssaha !' : 'Commande retirée. Bssaha !' })[order.status];
+    return ({ pending: 'Envoyée au restaurant. En attente de sa réponse.', accepted: order.mode === 'delivery' && !order.taken ? 'Acceptée. La mission est proposée aux livreurs.' : 'Commande acceptée. Préparation imminente.', preparing: 'Votre commande est en préparation.', ready: order.mode === 'delivery' ? (order.taken ? 'Commande prête : votre livreur la récupère.' : 'Commande prête. En attente d’un livreur.') : 'Commande prête. Code de retrait : ZD24.', transit: 'Votre livreur est en route. Code de livraison : 4826. Course à régler en espèces.', done: order.mode === 'delivery' ? 'Commande livrée. Course encaissée en espèces. Bssaha !' : 'Commande retirée. Bssaha !' })[order.status];
   };
   function orderDetails(node, title, lines) {
     node.replaceChildren(); const heading = document.createElement('h3'); heading.textContent = title; node.append(heading);
@@ -105,35 +105,39 @@ if ($('#demo-client')) {
     $('#client-order').textContent = statusText();
     $('#order-count').textContent = order ? '1' : '0'; $('#restaurant-amount').textContent = money(order ? order.food : 0);
     const rn = $('#restaurant-next'), cn = $('#courier-next'); rn.disabled = true; cn.disabled = true;
-    rn.textContent = 'En attente d’une commande'; cn.textContent = 'En attente d’une livraison';
+    rn.textContent = 'En attente d’une commande'; cn.textContent = 'En attente d’une mission';
     if (!order) {
       orderDetails($('#restaurant-order'), 'Aucune commande pour le moment.', ['Composez une commande dans l’espace client pour la recevoir ici.']);
       orderDetails($('#courier-order'), 'Aucune livraison à effectuer.', ['Choisissez « Livraison » dans l’espace client, puis simulez une commande.']); return;
     }
-    const lines = [order.summary, (order.mode === 'delivery' ? 'Livraison' : 'À emporter') + ' · Repas : ' + money(order.food), statusText()];
+    const lines = [order.summary, (order.mode === 'delivery' ? 'Livraison' : 'À emporter') + ' · Repas payé par carte : ' + money(order.food), statusText()];
     orderDetails($('#restaurant-order'), 'Commande fictive ZD24', lines);
     const rActions = { pending: 'Accepter la commande', accepted: 'Lancer la préparation', preparing: 'Marquer la commande prête' };
-    if (rActions[order.status]) { rn.textContent = rActions[order.status]; rn.disabled = false; }
+    if (order.status === 'accepted' && order.mode === 'delivery' && !order.taken) { rn.textContent = 'En attente d’un livreur'; }
+    else if (rActions[order.status]) { rn.textContent = rActions[order.status]; rn.disabled = false; }
     else if (order.status === 'ready' && order.mode === 'pickup') { rn.textContent = 'Simuler le retrait · code ZD24'; rn.disabled = false; }
-    else rn.textContent = order.status === 'waiting_courier' ? 'Confirmation du livreur nécessaire' : order.status === 'done' ? 'Commande terminée' : order.status === 'ready' ? 'En attente du retrait par le livreur' : 'Livraison en cours';
+    else rn.textContent = order.status === 'done' ? 'Commande terminée' : order.status === 'ready' ? (order.taken ? 'Le livreur récupère la commande' : 'En attente d’un livreur') : 'Livraison en cours';
     if (order.mode === 'pickup') { orderDetails($('#courier-order'), 'Cette commande est à emporter.', ['Aucune course n’est nécessaire. Recommencez pour tester une livraison.']); return; }
-    const cLines = ['Le Snack du quartier → Client démo, Casablanca', 'Rémunération fictive de la course : 15 DH. Commission Zidozid : 0 DH.', statusText()];
-    if (order.status === 'ready') cLines.push('Code de retrait à montrer au restaurant : ZD24.');
+    const cLines = order.taken ? ['Le Snack du quartier → Client démo, Casablanca', 'Course en espèces : 15 DH à encaisser auprès du client. Commission Zidozid : 0 DH.', statusText()] : ['Mission disponible : Casablanca · course de 15 DH en espèces. Premier arrivé, premier servi.', 'L’adresse du client apparaît une fois la mission acceptée.', statusText()];
+    if (order.taken && order.status === 'ready') cLines.push('Code de retrait à montrer au restaurant : ZD24.');
     if (order.status === 'transit') cLines.push('Code de livraison communiqué par le client : 4826.');
     orderDetails($('#courier-order'), 'Course fictive · Commande ZD24', cLines);
-    const cActions = { waiting_courier: 'Confirmer la course', ready: 'Simuler la remise · code ZD24', transit: 'Simuler la livraison · code 4826' };
-    if (cActions[order.status]) { cn.textContent = cActions[order.status]; cn.disabled = false; }
-    else cn.textContent = order.status === 'done' ? 'Livraison terminée' : 'En attente du restaurant';
+    const cActions = { ready: 'Simuler la remise · code ZD24', transit: 'Simuler la livraison · code 4826' };
+    if (order.status === 'accepted' && !order.taken) { cn.textContent = 'Accepter la mission'; cn.disabled = false; }
+    else if (order.status === 'ready' && order.taken) { cn.textContent = cActions.ready; cn.disabled = false; }
+    else if (cActions[order.status] && order.taken) { cn.textContent = cActions[order.status]; cn.disabled = false; }
+    else cn.textContent = order.status === 'done' ? 'Livraison terminée' : order.status === 'pending' ? 'En attente de l’acceptation du restaurant' : 'Mission déjà prise';
   }
   $('#place-order').addEventListener('click', () => {
     if (order || !subtotal()) return;
-    order = { mode: mode(), food: subtotal(), summary: Object.entries(cart).map(([id, qty]) => qty + ' × ' + products[id].name).join(', '), status: mode() === 'delivery' ? 'waiting_courier' : 'pending' };
+    order = { mode: mode(), food: subtotal(), summary: Object.entries(cart).map(([id, qty]) => qty + ' × ' + products[id].name).join(', '), status: 'pending', taken: false };
     renderCart(); renderOrder();
-    say(order.mode === 'delivery' ? 'Commande simulée. Ouvrez l’espace Livreur pour confirmer la course, puis l’espace Restaurant.' : 'Commande simulée. Ouvrez l’espace Restaurant pour la préparer.');
+    say(order.mode === 'delivery' ? 'Commande simulée. Ouvrez l’espace Restaurant pour l’accepter : la mission part ensuite aux livreurs.' : 'Commande simulée. Ouvrez l’espace Restaurant pour la préparer.');
   });
   $('#restaurant-next').addEventListener('click', () => {
     if (!order) return;
     const next = { pending: 'accepted', accepted: 'preparing', preparing: 'ready' };
+    if (order.status === 'accepted' && order.mode === 'delivery' && !order.taken) { say('La mission est proposée aux livreurs. Attendez qu’un livreur l’accepte.'); return; }
     if (next[order.status]) order.status = next[order.status];
     else if (order.status === 'ready' && order.mode === 'pickup') order.status = 'done';
     else return;
@@ -141,9 +145,10 @@ if ($('#demo-client')) {
   });
   $('#courier-next').addEventListener('click', () => {
     if (!order || order.mode !== 'delivery') return;
-    const next = { waiting_courier: 'pending', ready: 'transit', transit: 'done' };
-    if (!next[order.status]) return;
-    order.status = next[order.status]; renderOrder(); say(statusText() + (order.status === 'pending' ? ' Passez dans l’espace Restaurant.' : ''));
+    if (order.status === 'accepted' && !order.taken) { order.taken = true; renderOrder(); say('Mission acceptée : vous êtes le livreur de cette commande. Attendez la préparation.'); return; }
+    const next = { ready: 'transit', transit: 'done' };
+    if (!next[order.status] || !order.taken) return;
+    order.status = next[order.status]; renderOrder(); say(statusText());
   });
   $('#demo-reset').addEventListener('click', () => {
     cart = {}; order = null; document.querySelector('input[value="pickup"]').checked = true;
